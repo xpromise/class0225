@@ -26,6 +26,36 @@
 -->
 <script type="text/javascript">
 
+  // 1. 不存在变量提升
+  // console.log(a); // a is not defined
+  let a = 123;
+
+  // 2. 产生了块级作用域（一个包含块：if条件、for循环、switch、while/do while） 注意: 对象{}不会产生块作用域
+  if (false) {
+    var b = 123;
+    let c = 456;
+  }
+  console.log(b); // undefined
+  // console.log(c); // c is not defined
+
+  // 3. 不能重复声明
+  let e = 789;
+  // let e = 999; // Identifier 'e' has already been declared
+
+  // 4. 没有添加到window，没有预解析、预处理
+  console.log(window);
+  console.log(window);
+
+  let btns = document.querySelectorAll('button');
+
+  for (let i = 0; i < btns.length; i++) {
+    let btn = btns[i]
+    btn.onclick = function () {
+      // debugger
+      console.log(i);
+    }
+  }
+
 
 </script>
 </body>

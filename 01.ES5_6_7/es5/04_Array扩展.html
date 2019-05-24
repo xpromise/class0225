@@ -67,7 +67,15 @@ var result = arr.reduce(function (previousValue, currentValue, currentIndex, arr
    */
   return previousValue + currentValue;
 }, 0);
-  console.log(result);
+console.log(result);
+
+var arr1 = [{name: 'jack', age: 18}, {name: 'bob', age: 20}];
+// 找数组中某个元素的方法，一旦找到就退出循环
+var obj = arr1.find(function (item, index, array) {
+  return item.name === 'jack';
+});
+  console.log(obj);
+
 </script>
 </body>
 </html>

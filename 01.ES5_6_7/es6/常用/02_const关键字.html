@@ -16,6 +16,29 @@
 -->
 <script type="text/javascript">
 
+  // console.log(a); // a is not defined
+  const a = 123;
+  // const a = 123; // Identifier 'a' has already been declared
+
+  if (true) {
+    const b = 456;
+  }
+  // console.log(b); // b is not defined
+
+  // a = 465;  // Assignment to constant variable.
+  const b = {age: 18};
+  b.age = 20; // 地址值没变，所以可以修改
+  console.log(b);
+
+  /*
+    let 定义 变量
+    const 定义 常量
+      1. 默认变量使用let定义，今后let使用很多，只有确定不变的量用const  90%以上用let定义的
+      2. 默认变量使用const定义，今后const使用很多，只有确定可变的量用let  90%以上用const定义的
+        默认就用const定义，只有后面的值发生变化，在改为let
+   */
+
+
 </script>
 </body>
 </html>

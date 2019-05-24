@@ -17,6 +17,27 @@
 -->
 <script type="text/javascript">
 
+  const person = {name: 'jack', age: 18};
+  // 缓存一下，再去使用。性能更好
+  // const name = person.name;
+  // const age = person.age;
+
+  // 语法糖：新语法取代旧语法，新语法简单好用
+  // 对象的解构赋值: 没有顺序关系
+  const { age, sex, name } = person;
+  console.log(name, age, sex);
+
+  const arr = [1, 2, 3, 4];
+  // 数组的解构赋值: 根据顺序一一对应
+  const [a, b, , d] = arr;
+  console.log(a, b, d);
+
+  function fn({ name, age }, { sex }) {
+    console.log(name, age, sex);
+  }
+  fn(person, {sex: 'bob'});
+
+
 </script>
 </body>
 </html>
