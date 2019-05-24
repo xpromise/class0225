@@ -12,7 +12,25 @@
 -->
 <script type='text/javascript'>
 
+    var person = {
+        name: 'jack',
+        age: 18,
+        get sex() {  // 重新定义属性的读取返方法
+            console.log('读取sex方法调用了~');
+            return this._sex;
+        },
+        set sex(sexName) { // 重新定义属性的设置方法
+            console.log('设置sex方法调用了~');
+            this._sex = sexName + '~';
+        },
+        _sex: '男', // _xxx 代表私有属性/变量，使用者不要去使用
+    }
 
+
+    console.log(person);
+    console.log(person.sex);
+    person.sex = '女';
+    console.log(person.sex);
 </script>
 </body>
 </html>

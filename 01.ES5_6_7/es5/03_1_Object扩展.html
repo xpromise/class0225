@@ -47,11 +47,36 @@ ES5给Object扩展了一些静态方法, 常用的2个:
 
   // for in 能遍历对象自身属性和原型链上的所有属性:  只能遍历可枚举的属性
   for (var key in newObj) {
-    console.log(key);
+    // 得到自身上的属性
+    if (newObj.hasOwnProperty(key)) {
+      console.log(key);
+    }
   }
 
   delete newObj.sex;
-  delete newObj.address; // 只能删自身的属性
+  // delete newObj.address; // 只能删自身的属性
+
+  // 定义对象上属性的描述符
+  /*Object.defineProperty(newObj, 'address', {
+    writable: false,
+    value: newObj.address
+  })*/
+
+  Object.defineProperties(newObj, {
+    address: {
+      writable: false,
+      value: newObj.address
+    },
+    /*sex: {  // 报错： Cannot redefine property: sex
+      value: '女',
+      writable: true,
+      enumerable: true
+    }*/
+  })
+
+  console.log(newObj);
+  newObj.address = '北京市';
+  console.log(newObj);
 
 </script>
 </body>

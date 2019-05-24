@@ -23,7 +23,51 @@
    5. 根据arr产生一个新数组, 返回的每个元素要大于4
    6. 输出arr所有元素累加的结果
 */
+var arr = [2, 6, 8, 7, 3, 6, 8, 5, 1];
+// 1. 输出第一个6的下标
+console.log(arr.indexOf(6)); // 1
+// 2. 输出最后一个6的下标
+console.log(arr.lastIndexOf(6)); // 5
+// 3. 输出所有元素的值和下标
+arr.forEach(function (item, index) {
+  console.log(item, index);
+})
+/*$.each(arr, function (index, item) {
 
+})*/
+/*
+  forEach 只能数组使用，推荐使用
+  for 只能数组使用, 性能最好
+  while / do while 任意值使用
+  for in 通常用于对象
+ */
+
+// 4. 根据arr产生一个新数组,要求每个元素都比原来大10
+// 不会修改原数组，产生一个新数组。新数组长度和原数组一致，但里面值可能不一样
+// 应用：需要修改数组的每一项值
+var newArr1 = arr.map(function (item, index, array) {
+  return item + 10;
+});
+console.log(newArr1);
+// 5. 根据arr产生一个新数组, 返回的每个元素要大于4
+// 不会修改原数组，产生一个新数组。新数组的长度可能与原数组不一样，里面值不变（只是数组中的元素少了）
+// 应用：筛选数据
+var newArr2 = arr.filter(function (item, index, array) {
+  return item > 4;
+});
+console.log(newArr2);
+// 6. 输出arr所有元素累加的结果
+// 应用：累加（数值、字符串、数组、对象....）
+var result = arr.reduce(function (previousValue, currentValue, currentIndex, array) {
+  /*
+    previousValue: 上一次函数的返回值。默认是reduce的第二个参数
+    currentValue： 当前遍历数组元素的值
+    currentIndex： 当前遍历数组元素的下标
+    array： 数组本身
+   */
+  return previousValue + currentValue;
+}, 0);
+  console.log(result);
 </script>
 </body>
 </html>

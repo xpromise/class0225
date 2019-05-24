@@ -14,6 +14,17 @@
   * bind()是将函数返回
 -->
 <script type="text/javascript">
+  /*
+    区别bind()与call()和apply()?
+      联系：都能改变this指向
+      区别：
+        1. call / apply 会立即调用当前函数，并修改函数的this指向，
+        而 bind 不会调用函数，也没有改变原函数的this指向，但是返回一个新函数，新函数的this指向改变了
+        2. call / bind 方法传参一样，第一个是要改变函数this指向的对象，第二个以后的参数，将作为函数的实参传入
+        而 apply，第一个是要改变函数this指向的对象，第二个是一个数组，数组里面的每一个值，将作为函数的实参传入
+
+   */
+
 
 </script>
 </body>
