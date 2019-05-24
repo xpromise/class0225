@@ -20,6 +20,22 @@
 -->
 <script type="text/javascript">
 
+  const name = 'jack';
+  const age = 18;
+
+  // 对象简写方式：定义对象时使用
+  const person = {
+    name,
+    age,  // 同名属性和变量，可以简写一个
+    setName(name) {  // 简写function关键字
+      this.name = name;
+    }
+  };
+  // 对象解构赋值：获取对象上属性/方法时
+  const { name, age } = person;
+
+  console.log(person);
+
 </script>
 </body>
 </html>

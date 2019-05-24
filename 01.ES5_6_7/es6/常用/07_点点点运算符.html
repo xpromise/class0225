@@ -27,6 +27,24 @@
 -->
 <script type="text/javascript">
 
+
+  const arr = [1, 2, 3, 4];
+  // 将数组中的所有值展开
+  console.log(...arr); // 1 2 3 4
+  // 创建了一个新数组
+  const newArr = [6, ...arr, 5];
+  console.log(newArr);
+  // console.log(newArr === arr); // false
+
+  // 剩下所有的实参
+  function sum(a, ...args) {
+    // ...运算符 取代 arguments
+    console.log(args); // 真数组
+    console.log(arguments); // 伪数组
+  }
+
+  sum(1, 2, 3, 4, 5);
+
 </script>
 
 </body>
