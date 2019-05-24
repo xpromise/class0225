@@ -22,6 +22,37 @@ ES5给Object扩展了一些静态方法, 常用的2个:
 -->
 <script type="text/javascript">
 
+  var obj = {name: 'jack', age: 18};
+
+  // 创建一个新对象，将传入的obj做为新对象的__proto__属性的值
+  // 新对象就能继承传入对象属性和方法
+  var newObj = Object.create(obj, {
+    sex: {
+      value: '男',  // 指定属性值
+      writable: false, // 指定当前属性是否可写
+      enumerable: false, // 指定当前属性是否可以枚举（遍历、循环）
+      configurable: false, // 指定当前属性是否可以重新配置（是否可以重新修改writable、enumerable的值、属性不能被detele删除）
+    },
+    address: {
+      value: '深圳市',  // 指定属性值
+      writable: true, // 指定当前属性是否可写
+      enumerable: true, // 指定当前属性是否可以枚举（遍历、循环）
+      configurable: true, // 指定当前属性是否可以重新配置（是否可以重新修改writable、enumerable的值、属性不能被detele删除）
+    }
+  });
+
+  console.log(newObj);
+  // console.log(newObj.__proto__ === obj); // true
+  newObj.sex = '女';
+
+  // for in 能遍历对象自身属性和原型链上的所有属性:  只能遍历可枚举的属性
+  for (var key in newObj) {
+    console.log(key);
+  }
+
+  delete newObj.sex;
+  delete newObj.address; // 只能删自身的属性
+
 </script>
 </body>
 </html>
