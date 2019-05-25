@@ -37,7 +37,7 @@
       // 请求a数据成功了~
       console.log(result);
       // 需要请求b数据
-      // return是作为成功回调函数的返回值。而成功回调函数的返回值最终看做then方法返回值
+      // return是作为成功回调函数的返回值。而成功回调函数的返回值最终可以看做then方法返回值
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           const result = 'b数据';
@@ -71,9 +71,6 @@
       console.log(result);
     })
     .catch(() => {})
-
-
-
 
 
 </script>

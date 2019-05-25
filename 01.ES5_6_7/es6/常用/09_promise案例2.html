@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /*
+    需求： 同时请求三个数据，全部请求成功了，才OK，只要有一个失败，就失败
+   */
+  // 什么时候使用promise： 异步代码
+  const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('a数据请求回来了~');
+      const result = 'a数据';
+      resolve(result);
+    }, 1000)
+  })
+
+  const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('b数据请求回来了~');
+      const result = 'b数据';
+      resolve(result);
+    }, 2000)
+  })
+
+  const promise3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('c数据请求回来了~');
+      const result = 'c数据';
+      resolve(result);
+    }, 3000)
+  })
+
+  /*let successNum = 0;
+  let resultArr = [];
+
+  promise1
+    .then((result) => {
+      successNum++;
+      resultArr.push(result);
+
+      if (successNum === 3) {
+        console.log('全部成功了~');
+      }
+    })
+    .catch()
+
+  promise2
+    .then((result) => {
+      successNum++;
+      resultArr.push(result);
+
+      if (successNum === 3) {
+        console.log('全部成功了~');
+      }
+    })
+    .catch()
+
+  promise3
+    .then((result) => {
+      successNum++;
+      resultArr.push(result);
+
+      if (successNum === 3) {
+        console.log('全部成功了~');
+      }
+    })
+    .catch()
+*/
+
+  const promiseAll = Promise.all([promise1, promise2, promise3]);
+
+  promiseAll
+    .then((result) => {
+      // 一旦数组中promise全都变成成功的状态，才会成功的回调
+      console.log(result);  // 所有promise对象resolve传入参数的数组
+    })
+    .catch((error) => {
+      // 一旦数组中promise有一个变成失败的状态，立即触发失败的回调
+      console.log(error);
+    })
+
+  // 创建promise的方法
+  // new Promise(fn)  默认promsie是初始化状态
+  // Promise.all([]) 默认promsie是初始化状态
+  // Promise.resolve(data)  创建一个成功状态的promise
+  // Promise.reject(data)  创建一个失败状态的promise
+  // 应用：给异步代码包一层promise
+
+
+  Promise.resolve(123)
+    // 异步执行的
+    .then((result) => {
+      console.log(result);
+    })
+    .catch()
+
+
+</script>
+</body>
+</html>
