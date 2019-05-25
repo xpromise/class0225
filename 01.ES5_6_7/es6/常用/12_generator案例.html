@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+  /*
+    需求：请求a数据，再请求b数据，请求c数据
+   */
+
+  function* generator() {
+    console.log('函数开始执行了~');
+
+    const result1 = yield setTimeout(() => {
+      console.log('请求回来了a数据');
+      // 请求成功，让generator继续执行
+      iteratorObj.next('a数据');
+    }, 3000);
+
+    const result2 = yield setTimeout(() => {
+      console.log('请求回来了b数据');
+      // 请求成功，让generator继续执行
+      iteratorObj.next('b数据');
+    }, 2000);
+
+    const result3 = yield setTimeout(() => {
+      console.log('请求回来了c数据');
+      // 请求成功，让generator继续执行
+      iteratorObj.next('c数据');
+    }, 1000);
+
+    console.log(result1, result2, result3);
+
+    console.log('函数执行完毕了~');
+  }
+
+  const iteratorObj = generator();
+  // 为了执行第一个请求
+  iteratorObj.next();
+
+
+</script>
+</body>
+</html>

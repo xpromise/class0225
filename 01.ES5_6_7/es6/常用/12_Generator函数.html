@@ -27,6 +27,25 @@
       6、yield语句返回结果通常为undefined， 当调用next方法时传参内容会作为启动时yield语句的返回值。
   -->
 <script type="text/javascript">
+  // generator: 异步编程解决方案之一, 现在用的较少
+  // 惰性函数：很懒
+  function* fn() {
+    console.log('函数开始执行了~');
+    const flag = true;
+    const result = yield flag ? 123 : 456;
+    console.log(result);
+    console.log('函数执行完了~');
+  }
+
+  // 执行generator函数，返回值是一个iterator对象
+  const iteratorObj = fn();
+  console.log(iteratorObj);
+  // 通过iterator对象的next方法执行函数体代码（推着函数动一下）
+  const result1 = iteratorObj.next(111);
+  console.log(result1);  // {value: 123, done: false}  value 看yield后面表达式的值, done 看函数是否执行完毕：没有执行完就是false 执行完了就是true
+  const result2 = iteratorObj.next(222);
+  console.log(result2);
+
 </script>
 </body>
 </html>
