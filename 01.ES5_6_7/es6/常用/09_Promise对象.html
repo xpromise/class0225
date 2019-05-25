@@ -44,6 +44,75 @@
 
 <script type="text/javascript">
 
+  setTimeout(() => {
+    const sum = (x, y) => x + y;
+    sum(1, 2);
+    setTimeout(() => {
+      sum(3, 4);
+      setTimeout(() => {
+        sum(5, 6);
+      }, 3000)
+    }, 2000)
+  }, 1000)
+
+  /*
+    promise就是一个异步编程的解决方案，用来解决回调地狱问题
+   */
+
+  const sum = (x, y) => x + y;
+
+  const promise = new Promise((resolve, reject) => {
+    /*
+      resolve 解决
+      reject 拒绝
+
+      new Promise(), 会创建promise实例对象，实例对象内部默认是pending状态（初始化状态）
+      resolve()  将promise状态由初始化状态改为 fullfilled 成功的状态
+      reject() 将promise状态由初始化状态改为 rejected 失败的状态
+     */
+    // 当前函数中一般只放异步代码
+    setTimeout(() => {
+      // resolve(1); // promise状态只能有初始化状态改为成功/失败的状态。不能由成功变成失败或者失败变成成功
+      reject(2); // 将promise状态由初始化状态改为 fullfilled / resolved 成功的状态
+    }, 1000)
+  });
+
+  // promise实例对象， then方法
+  /*promise.then((result) => {
+    // 当promise对象状态变成成功的状态时，会调用当前函数
+    // 成功的回调函数可以接受resolve方法传入参数
+    console.log('成功的回调函数触发了~');
+    console.log(result);
+    sum(1, 2);
+  }, (error) => {
+    // 当promise对象状态变成失败的状态时，会调用当前函数
+    // 失败的回调函数可以接受reject方法传入参数
+    console.log('失败的回调函数触发了~');
+    console.log(error);
+  })*/
+
+  promise
+    .then((result) => {
+      // 当promise对象状态变成成功的状态时，会调用当前函数
+      // 成功的回调函数可以接受resolve方法传入参数
+      console.log('成功的回调函数触发了~');
+      console.log(result);
+      console.log(promise);
+      sum(1, 2);
+    })
+    .catch((error) => {
+      // 当promise对象状态变成失败的状态时，会调用当前函数
+      // 失败的回调函数可以接受reject方法传入参数
+      console.log('失败的回调函数触发了~');
+      console.log(error);
+      console.log(promise);
+    })
+
+  console.log(promise);
+
+
+
+
 </script>
 
 </body>
