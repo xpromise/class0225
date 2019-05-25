@@ -32,6 +32,25 @@
 
 
 <script type="text/javascript">
+  /*
+    每次调用Symbol函数，返回一个唯一的symbol数据
+    一般给对象设置唯一的属性。
+    多了一个数据类型：Symbol
+   */
+  const s1 = Symbol('name');
+  const s2 = Symbol('age');
+  console.log(s1);
+  console.log(s2);
+  console.log(s1 === s2); // false
+  console.log(typeof s1); // symbol: 新的数据类型
+
+  const person = {
+    [s1]: 'jack',
+    [s2]: 18
+  }
+
+  console.log(person);
+  console.log(person[s1]);
 
 </script>
 

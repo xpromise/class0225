@@ -28,6 +28,62 @@
   -->
 
   <script type="text/javascript">
+    
+    function iterator(arr) {
+      let index = 0;
+      let length = arr.length;
+      // 对象简写方式
+      return {
+        next() {
+          return index >= length ? {value: undefined, done: true} : {value: arr[index++], done: false};
+        }
+      }
+    }
+
+    const arr = [1, 2, 3, 4];
+
+    const iteratorObj = iterator(arr);
+    console.log(iteratorObj.next());
+    console.log(iteratorObj.next());
+    console.log(iteratorObj.next());
+    console.log(iteratorObj.next());
+    console.log(iteratorObj.next());
+
+    console.log(arr);
+    // iterator是一个接口机制，为了让所有数据的用统一的方式遍历（ for of ）
+    // 通过查看数据类型上是否有Symbol(Symbol.iterator)方法
+    // String 、Array、Set、Map
+    for (let value of arr) {
+      console.log(value);
+    }
+
+    const str = 'atguigu';
+    for (let value of str) {
+      console.log(value);
+    }
+
+    const obj = {name: 'jack'};
+    /*
+    const s1 = Symbol();
+    for (let value of s1) {
+      console.log(value);
+    }*/
+
+    console.log(arr);
+    console.log(str);
+    console.log(obj);
+
+    console.log(...arr); // ...运算符底层调用的是iterator接口进行遍历的
+    console.log(...str);
+    // console.log(...obj);
+
+    /*
+    forEach 只能数组使用，推荐使用
+    for 只能数组使用, 性能最好
+    while / do while 任意值使用
+    for in 通常用于对象
+    for of 当你不确定要遍历的是什么数据类型。这时候用for of
+   */
 
   </script>
 </body>
