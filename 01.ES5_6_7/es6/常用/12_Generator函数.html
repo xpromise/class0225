@@ -46,6 +46,24 @@
   const result2 = iteratorObj.next(222);
   console.log(result2);
 
+
+  // 手动给对象添加iterator接口
+  console.log(Symbol.iterator);
+  const person = {
+    name: 'jack',
+    age: 18,
+    sex: '男'
+  }
+  Object.prototype[Symbol.iterator] = function* () {
+    for (let key in this) {
+      yield this[key];
+    }
+  }
+
+  for (let value of person) {
+    console.log(value);
+  }
+
 </script>
 </body>
 </html>

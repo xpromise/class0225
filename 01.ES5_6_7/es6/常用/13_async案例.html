@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+
+  async function asyncFn() {
+
+    const result1 = await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('a数据请求成功了~');
+        resolve('a数据');
+      }, 3000)
+    })
+
+    const result2 = await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('b数据请求成功了~');
+        resolve('b数据');
+      }, 2000)
+    })
+
+    const result3 = await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('c数据请求成功了~');
+        resolve('c数据');
+      }, 2000)
+    })
+
+    console.log(result1, result2, result3);
+    return [result1, result2, result3];
+  }
+
+  const promise = asyncFn();
+
+  promise
+    .then((res) => {
+      console.log(res); // [result1, result2, result3]
+    })
+
+</script>
+</body>
+</html>

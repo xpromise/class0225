@@ -7,7 +7,7 @@
 <body>
 
 <!--
-  async函数(源自ES2017)
+  async函数(源自ES2017 - ES8)
   概念： 真正意义上去解决异步回调的问题，同步流程表达异步操作
   本质： Generator的语法糖
   语法：
@@ -22,8 +22,37 @@
     4、语意上更为明确，使用简单，经临床验证，暂时没有任何副作用
 
 -->
-<script type="text/javascript" src="./js/jquery-1.10.1.min.js"></script>
 <script type="text/javascript">
+  async function asyncFn() {
+    console.log('函数开始执行了~');
+
+    // const promise = new Promise((resolve, reject) => setTimeout(() => reject(123456), 2000));
+    // const promise = new Promise((resolve, reject) => setTimeout(reject.bind(null, 123456), 2000));
+    const promise = new Promise((resolve, reject) => setTimeout(resolve.bind(null, 123456), 2000));
+    // const promise = Promise.resolve();
+    // await只等promise对象：等promise对象状态由初始化变成成功状态。
+    // （一旦promise对象状态是初始化状态，一直等。一旦promise对象状态变成成功的状态，就不等了，执行后面代码）
+    // 一旦promise对象状态变成失败的状态，就不执行后面代码(如果捕获了async函数promise的异常，就不报错，没有捕获，就会报错)
+    // result的值就是resolve()传入的参数
+    const result = await promise;
+    console.log(result);
+    await promise;
+    console.log('函数执行完毕了~');
+    return 666;
+  }
+  // async函数返回值是一个promise对象: 默认是resolved状态
+  // 如果函数中有promise对象变成失败的状态，就是rejected状态
+  const result = asyncFn();
+  result
+    // 看async函数里面返回值，就是result的值
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+
+  console.log(result);
 
 </script>
 
