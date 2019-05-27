@@ -26,20 +26,24 @@
 
   function is(a, b) {
     /*if (a === b) {
-      // 判断 0 和 -0 的特殊情况
-      return !(-a === b);
+      // 判断 0 和 -0 的特殊情况 返回 false
+      // 0 和 0 / -0 和 -0 的情况返回 true
+      // return !(-a === b);
+      return !(-1 / a === 1 / b);
     } else {
       // 判断 NaN 和 NaN 的特殊情况
       return a !== a && b !== b;
     }*/
-    // return a === b ? (-a === b ? false : true) : (a !== a && b !== b ? true : false);
-    // return (a === b && (!(-a === b))) || (a !== a && b !== b);
-    return a === b ? !(-a === b) : a !== a && b !== b;
+    // return a === b ? ((-1 / a === 1 / b) ? false : true) : (a !== a && b !== b ? true : false);
+    // return (a === b && (!(-1 / a === 1 / b)) || (a !== a && b !== b);
+    return a === b ? !(-1 / a === 1 / b) : a !== a && b !== b;
   }
 
-  console.log(is(0, -0));
-  console.log(is(NaN, NaN));
-  console.log(is(true, true));
+  console.log(is(0, -0)); // false
+  console.log(is(0, 0)); // true
+  console.log(is({}, {})); // false
+  console.log(is(NaN, NaN)); // true
+  console.log(is(true, true)); // true
 
   const obj = {};
   const obj1 = {name: 'jack'};
