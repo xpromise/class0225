@@ -5,6 +5,21 @@
   <title>Title</title>
 </head>
 <body>
+<script type="text/javascript">
+  const promise = new Promise((resolve, reject) => setTimeout(reject, 1000));
 
+  promise
+    .then(() => {
+      console.log('then');
+    })
+    .catch(() => {
+      console.log('catch');
+    })
+    .finally(() => {
+      // 不管成功还是失败都会触发
+      console.log('finally');
+    })
+
+</script>
 </body>
 </html>

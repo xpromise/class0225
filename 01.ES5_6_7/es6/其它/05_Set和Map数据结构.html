@@ -9,10 +9,10 @@
 1. Set容器 : 无序不可重复的多个value的集合体
   * Set()
   * Set(array)
-  * add(value)
-  * delete(value)
-  * has(value)
-  * clear()
+  * Set.prototype.add(value) 给set容器添加一个值
+  * Set.prototype.delete(value) 删除一个
+  * Set.prototype.has(value)
+  * Set.prototype.clear() 清空所有
   * size
 2. Map容器 : 无序的 key不重复的多个key-value的集合体
   * Map()
@@ -26,6 +26,23 @@
 -->
 
 <script type="text/javascript">
+
+  const arr = [2, 5, 8, 5, 1, 4, 8];
+  const s1 = new Set(arr);
+  console.log(s1);
+  // 数组去重
+  console.log([...new Set(arr)]);
+
+  s1.add(9);
+  console.log(s1);
+  console.log(s1.has(9));
+  s1.clear();
+  console.log(s1);
+
+  // 无序的 key不重复的多个key-value的集合体
+  const array = [1, 2, 3];
+  const m1 = new Map([[{name: 'jack'}, function fn() {}], [array, true], [array, false]]);
+  console.log(m1);
 
 </script>
 </body>

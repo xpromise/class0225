@@ -10,6 +10,14 @@
   Object.entries()
 -->
 <script type="text/javascript">
+  const person = {name: 'jack', age: 18}; // [['name', 'jack'], ['age': 18]]
+  // 提取对象中所有属性名，作为一个数组返回
+  console.log(Object.keys(person));
+  // 提取对象中所有属性值，作为一个数组返回
+  console.log(Object.values(person));
+
+  console.log(Object.entries(person)); // [['name', 'jack'], ['age': 18]]
+
 </script>
 </body>
 </html>
