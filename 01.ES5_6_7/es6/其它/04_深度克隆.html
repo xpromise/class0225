@@ -33,6 +33,80 @@
 -->
 <script type="text/javascript">
 
+  let num1 = 123;
+  let num2 = num1;
+  num2++;
+  console.log(num1);
+
+  let obj1 = {name: 'jack', age: 18, hobby: ['篮球', '唱', '跳'], setName (name) {this.name = name;}};
+  // let obj2 = obj1;
+  // obj2.age++;
+  // console.log(obj1);
+
+  // 需求：我希望克隆对象，然后克隆对象发生变化，不会影响原对象
+  // 浅度克隆
+  /*let obj3 = Object.assign({}, obj1);
+  obj3.hobby.push('rap');
+  console.log(obj3);
+  console.log(obj1);
+*/
+  // 深度克隆
+  // JSON能实现深度克隆，不能克隆函数数据
+  const json = JSON.stringify(obj1);
+  const obj4 = JSON.parse(json);
+  console.log(obj1, obj4);
+  obj4.hobby.push('rap');
+  console.log(obj1, obj4);
+
+  // 检查数据类型
+  function checkType(target) {
+    return Object.prototype.toString.call(target).slice(8, -1);
+  }
+
+  /*console.log(checkType(123));
+  console.log(checkType(true));
+  console.log(checkType({}));
+  console.log(checkType(function () {}));
+  console.log(checkType([]));
+  console.log(checkType(null));
+  console.log(checkType(/123/));
+  console.log(checkType(new Date()));
+*/
+  // 深度克隆： 深度克隆所有数据
+  function deepClone(target) {
+    // 因为不确定克隆的是什么数据，但是能确定的是一定是引用数据类型
+    let result = null;
+    // 检查数据的类型
+    const type = checkType(target);
+    // 判断数据的类型，如果是对象/数组就处理，不是就直接返回
+    if (type === 'Object') {
+      result = {};
+    } else if (type === 'Array') {
+      result = [];
+    } else {
+      // 其他类型就直接返回
+      return target;
+    }
+
+    // for in 即能遍历对象也能遍历数组
+    for (let key in target) {
+      // 获取属性值
+      const value = target[key];
+      // 将克隆的值作为新对象的某个属性的值
+      // const newValue = deepClone(value);
+      // result[key] = newValue;
+      result[key] = deepClone(value);
+    }
+
+    return result;
+  }
+
+  const person = {name: 'jack', age: 18, hobby: ['篮球', '唱', '跳'], sex: { option1: '男', option2: '女' }, setName (name) {this.name = name;}};
+
+  const newObj = deepClone(person);
+  newObj.hobby.push('rap');
+  
+  console.log(person, newObj);
 </script> 
 </body>
 </html>
