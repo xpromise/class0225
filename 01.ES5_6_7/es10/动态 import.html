@@ -5,6 +5,13 @@
   <title>Title</title>
 </head>
 <body>
-
+<button id="btn">按钮</button>
+<script type="text/javascript">
+  // 按需加载
+  document.getElementById('btn').onclick = function () {
+    // 只会加载一次
+    import('./a.js');
+  }
+</script>
 </body>
 </html>

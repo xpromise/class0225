@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      background-color: pink;
+      height: 2000px;
+    }
+  </style>
+</head>
+<body>
+<div></div>
+<script type="text/javascript">
+  // 绑定滚轮事件
+  // 需求：滚轮事件发现单位时间内触发回调函数的次数太多，性能不好
+  // 解决：让函数调用次数更少
+  // 节流函数：在单位时间内让函数只调用一次，是第一次生效
+  // 防抖函数：在单位时间内让函数只调用一次，是最后一次生效
+  document.onscroll = debounce(function (e) {
+    console.log('滚轮事件触发了~');
+    console.log(e);
+    console.log(this);
+  }, 1000)
+
+  // 防抖函数
+  function debounce(fn, time) {
+    let timerId = null;
+    // 实际上下面函数就是DOM事件回调函数
+    return function () {
+      clearTimeout(timerId);
+      const args = arguments;
+      timerId = setTimeout(() => {
+        // fn函数的this指向问题，参数有问题（少event）
+        // 大于1s, 可以触发， 小于1s就不触发
+        fn.apply(this, args);
+      }, time);
+    }
+  }
+
+</script>
+</body>
+</html>
