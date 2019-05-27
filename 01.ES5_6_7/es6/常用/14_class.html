@@ -16,5 +16,64 @@
 -->
 <script type="text/javascript">
 
+  // 目的： 生成实例对象，然后使用
+  /*function Father(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  Father.prototype.setName = function (name) {
+    this.name = name;
+  }
+
+  function Son(name, age, sex) {
+    Father.call(this, name, age);
+    this.sex = sex;
+  }
+
+  Son.prototype.__proto__ = Father.prototype;
+
+  const f = new Father('jack', 18);
+  f.setName('bob');
+  console.log(f);*/
+
+
+
+  // 定义类：构造函数
+  class Father {
+    // 给实例对象添加属性
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    // 给实例对象添加方法
+    setName(name) {
+      this.name = name;
+    }
+  }
+
+  // 定义子类继承父类，自动继承父类的属性和方法
+  // 使用继承必须在constructor函数中调用super方法或者不写constructor
+  class Son extends Father{
+    // 给实例对象添加属性
+    constructor(name, age, sex) {
+      super(name, age); // 调用父类的构造方法： constructor
+      this.sex = sex;
+    }
+    // 给实例对象添加方法
+    setAge(age) {
+      this.age = age;
+    }
+  }
+
+  /*const f = new Father('jack', 20);
+  console.log(f);
+  f.setName('bob');
+  console.log(f);*/
+
+  console.log(Father.prototype);
+  console.log(typeof Son);
+  const s = new Son('bob', 20, '男');
+  console.log(s);
+
 </script>
 </html>
