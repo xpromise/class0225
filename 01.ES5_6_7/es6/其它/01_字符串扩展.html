@@ -6,13 +6,17 @@
 </head>
 <body>
 <!--
-1. includes(str) : 判断是否包含指定的字符串
-2. startsWith(str) : 判断是否以指定字符串开头
-3. endsWith(str) : 判断是否以指定字符串结尾
-4. repeat(count) : 重复指定次数
+1. String.prototype.includes(str) : 判断是否包含指定的字符串
+2. String.prototype.startsWith(str) : 判断是否以指定字符串开头
+3. String.prototype.endsWith(str) : 判断是否以指定字符串结尾
+4. String.prototype.repeat(count) : 重复指定次数
 -->
 <script type="text/javascript">
-
+  const str = 'atguigu';
+  console.log(str.includes('gug')); // true
+  console.log(str.startsWith('atg')); // true
+  console.log(str.endsWith('gu')); // true
+  console.log(str.repeat(3)); // 'atguiguatguiguatguigu'
 </script>
 </body>
 </html>

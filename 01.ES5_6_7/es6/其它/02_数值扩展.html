@@ -14,6 +14,24 @@
 6. Math.trunc(i) : 直接去除小数部分
 -->
 <script type="text/javascript">
+  console.log(0o666); // 0 - 7
+  console.log(0b1010); // 0 - 1   8421法
+
+  console.log(Infinity); // 正无穷大
+  console.log(-Infinity); // 负无穷大
+  console.log(NaN); // not a number
+
+  console.log(Number.isFinite(Infinity)); // false
+  console.log(Number.isNaN(NaN)); // true  x !== x
+  console.log(NaN === NaN); // NaN不与任何数相等，包括它自身
+
+  console.log(Number.isInteger(1.1)); // false
+
+  console.log(Number.parseInt('123a.123')); // 123  整型：整数
+  console.log(Number.parseFloat('123.123')); // 123.123 浮点型：小数
+
+  console.log(Math.trunc(456.865)); // 456
+  console.log(Math.floor(456.865)); // 456
 
 </script>
 </body>

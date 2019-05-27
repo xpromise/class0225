@@ -15,10 +15,30 @@
 <!--
 1. Array.from(v) : 将伪数组对象或可遍历对象转换为真数组
 2. Array.of(v1, v2, v3) : 将一系列值转换成数组
-3. find(function(value, index, arr){return true}) : 找出第一个满足条件返回true的元素
-4. findIndex(function(value, index, arr){return true}) : 找出第一个满足条件返回true的元素下标
+3. Array.prototype.find(function(value, index, arr){return true}) : 找出第一个满足条件返回true的元素
+4. Array.prototype.findIndex(function(value, index, arr){return true}) : 找出第一个满足条件返回true的元素下标
 -->
 <script type="text/javascript">
+  // 伪数组对象
+  const btns = document.querySelectorAll('button');
+  // 将伪数组转化为真数组
+  const newBtns1 = Array.from(btns);
+  console.log(newBtns1);
+
+  const newBtns2 = Array.prototype.slice.call(btns);
+  console.log(newBtns2);
+
+  const newBtns3 = [...btns];
+  console.log(newBtns3);
+
+  console.log(Array.of(1, true, {})); // [1, true, {}]
+
+  const arr = [{age: 18}, {age: 19}, {age: 20}, {age: 21}];
+
+  // const obj = arr.find((item, index, arr) => item.age === 20);
+  const index = arr.findIndex((item, index, arr) => item.age === 20);
+  console.log(index);
+
 
 </script>
 </body>

@@ -16,6 +16,38 @@
 -->
 
 <script type="text/javascript">
+  // 全等运算符的问题
+  console.log(0 === -0); // true  false
+  console.log(NaN === NaN); // false  true
+  // Object.is方法解决
+  console.log(Object.is(1, 1)); // true
+  console.log(Object.is(0, -0)); // false
+  console.log(Object.is(NaN, NaN)); // true
+
+  function is(a, b) {
+    /*if (a === b) {
+      // 判断 0 和 -0 的特殊情况
+      return !(-a === b);
+    } else {
+      // 判断 NaN 和 NaN 的特殊情况
+      return a !== a && b !== b;
+    }*/
+    // return a === b ? (-a === b ? false : true) : (a !== a && b !== b ? true : false);
+    // return (a === b && (!(-a === b))) || (a !== a && b !== b);
+    return a === b ? !(-a === b) : a !== a && b !== b;
+  }
+
+  console.log(is(0, -0));
+  console.log(is(NaN, NaN));
+  console.log(is(true, true));
+
+  const obj = {};
+  const obj1 = {name: 'jack'};
+  const obj2 = {age: 18};
+  // 将后面目标对象上的属性和方法复制到源对象上
+  const result = Object.assign(obj, obj1, obj2);
+  console.log(result === obj);
+
 
 </script>
 </body>
