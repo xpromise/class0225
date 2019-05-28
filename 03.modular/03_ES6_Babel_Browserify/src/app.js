@@ -19,9 +19,11 @@
      添加文件： .babelrc (运行babel指令，会默认读取配置文件)
      使用： npx babel ./src -d ./build
      作用： 1. 将ES6模块化语法转化为commonjs模块化语法 2. 将ES6以上高级语法编译成ES5以下浏览器能识别的语法
-     使用： browserify ./build/app.js -o ./dist/dist.js
+     使用： browserify ./build/app.js -o ./dist/dist.js 将commonjs模块化语法转换成浏览器能识别的语法
 
      npx babel ./src -d ./build && browserify ./build/app.js -o ./dist/dist.js
+
+     npm config set registry http://registry.npm.taobao.org/ 会将国外npm仓库替换为国内淘宝仓库
 
  */
 
