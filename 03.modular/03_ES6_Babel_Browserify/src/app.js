@@ -37,7 +37,7 @@ import { count, data } from './module3';
 
 
 console.log(sum(1, 2, 3, 4));
-// console.log(name, age);
-console.log(person); // undefined
+console.log(name, age);
+// console.log(person); // undefined
 console.log(data);
 console.log(count(1, 2));
