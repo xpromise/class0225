@@ -20,35 +20,40 @@ Array.prototype.flat()
     1. flat 全部降成1维
     2. 可以传参，根据参数降维
    */
-  /*Array.prototype.flat = function (num) {
+  Array.prototype.flat = function () {
     // this 就指向要处理的数组  --> arr.flat()
     let result = [];
-    /!*this.forEach((item, index) => {
+    /*this.forEach((item, index) => {
       if (Array.isArray(item)) {
         result = result.concat(item.flat());
       } else {
         result.push(item);
       }
-    })*!/
+    })*/
     this.forEach((item) => Array.isArray(item) ? result = result.concat(item.flat()) : result.push(item));
     return result;
   }
 
-  Array.prototype.flat = function (num) {
+  Array.prototype.myFlat = function (num) {
     // this 就指向要处理的数组  --> arr.flat()
     num--;
     if (num < 0) return this;
     let result = [];
-    /!*this.forEach((item, index) => {
+    this.forEach((item, index) => {
       if (Array.isArray(item)) {
         result = result.concat(item.flat());
       } else {
         result.push(item);
       }
-    })*!/
-    this.forEach((item) => Array.isArray(item) ? result = result.concat(item.flat(num)) : result.push(item));
+    })
+    // this.forEach((item) => Array.isArray(item) ? result = result.concat(item.myFlat(num)) : result.push(item));
     return result;
-  }*/
+  }
+
+  console.log(arr.myFlat(1));
+  console.log(arr.myFlat(Infinity));
+
+
 
 </script>
 </body>

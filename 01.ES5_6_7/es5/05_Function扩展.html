@@ -25,6 +25,20 @@
 
    */
 
+  Function.prototype.myBind = function (obj, ...args1) {
+    // bind方法的this指向调用的函数
+    const _self = this;
+    return function (...args2) {
+      obj.__proto__._fn = _self;
+      // 将数组展开，所有值作为参数传入函数中(args1是bind绑定的参数，args2是新函数调用时传入的参数)
+      const result = obj._fn(...args1, ...args2);
+      // 调用结束后删除多余属性
+      delete obj.__proto__._fn;
+      // 将fn函数的返回值作为myCall方法返回值返回
+      return result;
+    }
+  };
+
 </script>
 </body>
 </html>
