@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #box{
+      width: 100px;
+      height: 100px;
+      background-color: yellowgreen;
+    }
+  </style>
+  <link rel="stylesheet" href="">
+<!--
+  style和link放head里面为了避免闪屏
+  style  异步解析样式代码： 可能出现闪屏
+  link   同步解析样式代码： 彻底避免闪屏现象
+
+  如果涉及到首屏用户可视区域内的样式代码，必须link
+  但是其他样式代码，用style
+-->
+</head>
+<body>
+<div id="box"></div>
+
+</body>
+</html>

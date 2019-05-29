@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript" src="./js/test2.js" async></script>
+  <script type="text/javascript" src="./js/test3.js" async></script>
+</head>
+<body>
+<!--
+  script加上async属性：异步加载：什么时候加载完成就立即执行
+  当代码是一个完整的功能（不依赖于其他js文件），不是立即就需要使用的
+-->
+<script type="text/javascript">
+  console.log(111);
+</script>
+<script type="text/javascript" src="./js/test1.js"></script>
+</body>
+</html>

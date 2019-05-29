@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript" src="./js/test2.js" defer></script>
+  <script type="text/javascript" src="./js/test3.js" defer></script>
+</head>
+<body>
+<!--
+  script加上defer属性：等其他同步script先执行，在执行defer script标签的代码。
+  执行顺序：从上到下，依次执行。
+
+-->
+<script type="text/javascript">
+  console.log(111);
+</script>
+<script type="text/javascript" src="./js/test1.js"></script>
+<script type="text/javascript">
+  console.log(111);
+</script>
+<script type="text/javascript">
+  console.log(111);
+</script>
+<script type="text/javascript">
+  console.log(111);
+</script>
+
+</body>
+</html>
