@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<img src="./img/1.jpg_.webp" class="img_webp" alt="img">
+<script type="text/javascript">
+  const img = document.querySelector('.img_webp');
+
+  img.onload = function () {
+    console.log('加载成功~');
+  }
+  // 能判断图片是否加载失败
+  img.onerror = function () {
+    console.log('加载失败~');
+    // 如果加载失败，不支持webp
+    this.src = this.src.slice(0, -6);
+  }
+
+</script>
+</body>
+</html>
