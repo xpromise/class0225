@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      width: 100px;
+      height: 100px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<div></div>
+<p>hello atguigu</p>
+<button id="btn">按钮</button>
+<script type="text/javascript">
+  const div = document.querySelector('div');
+  document.getElementById('btn').onclick = function () {
+    // div.style.display = 'none';  // 导致重排重绘
+    // div.style.visibility = 'hidden';  // 导致重绘
+    div.style.opacity = 0; // 导致重排重绘
+  }
+</script>
+</body>
+</html>
