@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    img{
+      float:left;
+      width: 50%;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+<img src="./imgs/loading.gif" data-src="./imgs/1.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/2.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/3.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/4.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/5.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/6.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/7.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/8.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/9.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/10.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/11.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/12.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/13.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/14.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/15.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/16.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/17.jpg" class="lazy-loading" alt="img">
+<img src="./imgs/loading.gif" data-src="./imgs/18.jpg" class="lazy-loading" alt="img">
+</body>
+<script type="text/javascript">
+  // 视口高度
+  const viewHeight = document.documentElement.clientHeight;
+
+  function lazyLoading() {
+    const imgs = document.querySelectorAll('.lazy-loading');
+
+    imgs.forEach((img) => {
+      // 获取元素距离视口的位置
+      const { top } = img.getBoundingClientRect();
+      // 判断top是否小于视口的高度，说明出现在可视区域内
+      if (top < viewHeight) {
+        // 加载真正图片
+        const imgSrc = img.dataset.src;
+        // 先加载图片
+        const image = new Image();
+        image.src = imgSrc;
+        // 加载成功后再设置到元素上
+        image.onload = function () {
+          // 图片只需加载一次，后面默认用缓存
+          img.src = imgSrc;
+          // 移除class，不要重复处理已经处理好的图片
+          img.className = '';
+          img.removeAttribute('data-src');
+        }
+
+      }
+    })
+
+  }
+  // 让出现在视口的图片默认加载
+  lazyLoading();
+
+  document.onscroll = lazyLoading;
+
+</script>
+</html>

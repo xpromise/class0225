@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<img src='./imgs/1.jpg' alt="">
+<script type="text/javascript">
+  // 提前加载后面需要使用资源 --> 图片
+  const arr = ['./imgs/1.jpg', './imgs/2.jpg'];
+
+  arr.forEach((img) => {
+    const image = new Image();
+    image.src = img;
+  })
+
+</script>
+</body>
+</html>
