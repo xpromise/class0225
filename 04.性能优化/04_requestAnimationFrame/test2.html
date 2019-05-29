@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      width: 100px;
+      height: 100px;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+<div></div>
+<script type="text/javascript">
+
+  const div = document.querySelector('div');
+
+  let dis = 1;
+
+  function animation(id) {
+    console.log(id);
+    dis++;
+    div.style.transform = `translateX(${dis}px)`;
+    if (dis >= 1000) return;
+    requestAnimationFrame(animation);
+  }
+
+  // requestAnimationFrame
+  // requestAnimationFrame方法会将多次的DOM操作、css操作合并一次去计算
+  // 只会导致一次重排、重绘
+  requestAnimationFrame(animation)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test1</title>
+</head>
+<body>
+<button id="set">设置</button>
+<button id="read">读取</button>
+<button id="delete">删除</button>
+
+<script type="text/javascript">
+
+  /*
+    sessionStorage:
+      临时/会话存储：当会话开始时会一直保留，直到会话结束会自动删除
+    localStorage:
+      持久存储：数据会一直保存，除非删除
+   */
+  const setBtn = document.getElementById('set');
+  const readBtn = document.getElementById('read');
+  const deleteBtn = document.getElementById('delete');
+
+
+  setBtn.onclick = function () {
+    const person = {name: 'jack', age: 19};
+    // 基本数据类型
+    localStorage.setItem('user', JSON.stringify(person));
+  }
+
+  readBtn.onclick = function () {
+    const user = localStorage.getItem('user');
+    console.log(JSON.parse(user));
+  }
+
+  deleteBtn.onclick = function () {
+    localStorage.removeItem('user');
+  }
+
+  // storage事件：其他页面操作storage，就会触发事件
+  window.addEventListener('storage', function (e) {
+    // console.log(e);
+    const { key, newValue, oldValue } = e;
+
+  })
+
+  /*window.onStorage = function (e) {
+    console.log(e);
+  }
+*/
+
+
+</script>
+</body>
+</html>
