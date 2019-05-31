@@ -4,9 +4,13 @@
   "description": "",
   "main": "01.helloNode.js",
   "dependencies": {
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "react": "^16.8.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "lodash": "^4.17.11"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
