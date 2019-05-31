@@ -23,7 +23,8 @@
       npm i yarn -g 全局安装，作为指令使用
       1. 下载并添加到生产依赖  yarn add xxx
       2. 下载并添加到开发依赖 yarn add xxx --dev
-      3. 下载全局包 yarn add global xxx
+      3. 下载全局包 yarn global add xxx
+        需要将下载包配置成环境变量才能使用，一般不用yarn下载全局包
       4. 下载依赖所有包 yarn
 
      yarn config set registry http://registry.npm.taobao.org/
