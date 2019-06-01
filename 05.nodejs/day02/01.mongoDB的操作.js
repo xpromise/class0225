@@ -1,3 +1,4 @@
+/*
 // 展示所有数据库
 show dbs
 // 展示当前数据库中所有集合
@@ -20,3 +21,4 @@ db.students.updateOne({name: 'jack'}, {$set: {age: 19}})
 db.students.updateOne({name: 'jack'}, {$inc: {age: 1}})
 // 删除数据的方法
 db.students.deleteOne({name: 'jack'})
+*/
