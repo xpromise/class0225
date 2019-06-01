@@ -8,13 +8,17 @@
     3. 创建模型对象
     4. 创建文件对象
 
+  除了node核心模块（自带的），都需要通过npm下载
  */
 // 引入mongoose模块
 const mongoose = require('mongoose');
 // 1. 连接上数据库
 const promise = new Promise((resolve, reject) => {
   // 如果数据库存在就连接上，不存在就会创建
-  mongoose.connect('mongodb://localhost:27017/mongoose_test', { useNewUrlParser: true });
+  // mongoose.connect('mongodb://localhost:27017/数据库名称', 配置对象 options);
+  // 配置对象： 叫做属性名/属性值固定的对象
+  mongoose.connect('mongodb://localhost:27017/mongoose_test', { useNewUrlParser: true, useCreateIndex: true });
+  // 为了判断数据库连接成功
   mongoose.connection.once('open', (err) => {
     if (!err) {
       console.log('数据库连接成功~');
@@ -50,7 +54,7 @@ const promise = new Promise((resolve, reject) => {
 
   // 3. 创建模型对象 -- 集合
   // mongoose.model('集合名称', 约束对象)  集合名称：建议是复数形式
-  const Students = mongoose.model('students', studentsSchema)
+  const Students = mongoose.model('students', studentsSchema);
   // 4. 创建文档对象
   const s = new Students({
     name: '唐品唱',
