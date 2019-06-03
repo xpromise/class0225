@@ -11,7 +11,7 @@ const students = require('./models/students');
   await db;
   // 连接成功再去操作数据库
   const result = await students.create({
-    name: '沛华',
+    // name: '沛华',
     age: 35,
     sex: '女',
     hobby: ['抽烟', '喝酒', '烫头'],
