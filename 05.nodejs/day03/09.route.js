@@ -36,6 +36,21 @@ const app = express();
             response.set() 设置响应头信息
 
       注意：返回响应只能做一次，否则就会报错
+
+    2. 路由是什么？
+      是定义请求地址和处理请求的一种方式
+      简单来讲：一种key-value的映射关系。key是路由路径、value是回调函数
+    3. 作用：
+      1. 定义请求地址
+      2. 接收并处理请求
+    4. 路由执行：
+      如何匹配上一个路由：必须请求方式和请求路径对应上
+
+      所有路由最终都是按照先后顺序放在一个数组中，然后服务器接收请求，会遍历数组依次取出路由，看是否匹配上。
+      如果匹配上了，就会执行回调函数返回响应，后面的就不看了。
+      如果没有匹配上，就看下一个路由。
+        如果都没有匹配上，返回404。
+
  */
 app.get('/home', (request, response) => {
   // console.log(request.headers.host);
@@ -46,7 +61,6 @@ app.get('/home', (request, response) => {
   // response.download('./index.html');
   // response.sendFile(resolve(__dirname, './index.html'));
   // response.redirect('https://www.baidu.com');
-
 
   response.set('xxx', 'yyyyy');
   console.log(response.get('xxx'));
@@ -66,7 +80,7 @@ app.get(/\/food\/(1\d{2}|200)/, (request, response) => {
   response.send('这是服务器返回的响应');
 });
 
-app.post('/', (request, response) => {
+app.post('/home', (request, response) => {
 
 });
 
