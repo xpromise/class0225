@@ -25,7 +25,7 @@ const server = http.createServer((request, response) => {
   response.end('<h1>这是nodejs服务器返回的响应数据</h1>');
 });
 // 监听端口号
-server.listen(3000, (err) => {
+server.listen(3001, (err) => {
   if (!err) console.log('服务器启动成功了~');
   else console.log('服务器启动失败了', err);
 });
