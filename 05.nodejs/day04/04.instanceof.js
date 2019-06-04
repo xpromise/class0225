@@ -9,8 +9,8 @@ function myInstanceof(A, B) {
     // 抛异常错误
     throw new Error('B is not a function');
   }
-  // 如果A不是对象，就不用检查，直接返回false。
-  if (typeof A !== 'object' || A === null) {
+  // 如果A不是对象(对象包含普通对象、函数、数组)，就不用检查，直接返回false。
+  if (typeof A !== ('object' || 'function') || A === null) {
     return false;
   }
   // 缓存
