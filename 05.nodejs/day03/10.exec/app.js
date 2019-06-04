@@ -31,7 +31,35 @@ app.get('/register', (req, res) => {
   await db;
 
   // 提交登录请求访问的路由
-  app.get('/req/login', (req, res) => {
+  app.get('/req/login', async (req, res) => {
+    // 1. 获取用户提交请求参数 req.query
+    const { username, password } = req.query;
+    // 2. 对用户提交的数据校验，正则验证
+    // 创建正则规则
+    const usernameReg = /^[a-zA-Z0-9_]{5,10}$/;  // 用户名可以包含英文、数字、下划线，长度为5-10位
+    const passwordReg = /^[a-zA-Z0-9_]{5,15}$/;  // 密码可以包含英文、数字、下划线，长度为5-15位
+    // 分别对数据进行校验
+    if (!usernameReg.test(username)) {
+      // 说明用户名有问题，提示错误问题
+      res.send('用户名可以包含英文、数字、下划线，长度为5-10位');
+      return;
+    }
+
+    if (!passwordReg.test(password)) {
+      res.send('密码可以包含英文、数字、下划线，长度为5-15位');
+      return;
+    }
+
+    const result = await Users.findOne({username, password});
+
+    if (result) {
+      // 有值说明用户存在
+      res.send(`${username}登录成功`);
+    } else {
+      // 一般不会具体返回是用户名错误还是密码错误
+      // 反正别人试密码
+      res.send(`${username}登录失败，用户名或密码错误`);
+    }
 
   });
 
