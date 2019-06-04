@@ -87,7 +87,7 @@ app.get('/register', middlewareFn, (req, res) => {
 
 app.post('/login', (req, res) => {
   console.log(req.body); // undefined  { username: 'admin', password: '123123' }
-  console.log(a);
+  // console.log(a);
 
   res.end('success333');
 })
@@ -129,7 +129,7 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(3000, (err) => {
+app.listen(3001, (err) => {
   if (!err) console.log('服务器启动成功了~');
   else console.log(err);
 });
