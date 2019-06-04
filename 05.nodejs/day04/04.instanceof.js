@@ -31,12 +31,12 @@ function myInstanceof(A, B) {
   return false;
 }
 
+const num = 123;
 console.log(myInstanceof({}, Object));
 console.log(myInstanceof([], Object));
-console.log(myInstanceof(123, Object));
-console.log(myInstanceof(123, Number));
+console.log(myInstanceof(num, Object));
+console.log(myInstanceof(num, Number));
 
-const num = 123;
 console.log([] instanceof Object);
 console.log({} instanceof Object);
 console.log(num instanceof Object);
