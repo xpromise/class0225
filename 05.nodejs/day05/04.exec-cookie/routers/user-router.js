@@ -1,6 +1,8 @@
 const express = require('express');
 const sha1 = require('sha1');
 
+const { resolve } = require('path');
+
 const Users = require('../models/users');
 
 const router = new express.Router();
@@ -71,7 +73,13 @@ router.post('/login', async (req, res) => {
 
   if (result) {
     // 有值说明用户存在
-    res.send(`${username}登录成功`);
+    // 设置cookie：代表当前用户
+    res.cookie('user', result.id, {maxAge: 1000 * 3600 * 24 * 7});
+    // res.redirect('http://localhost:3000/usercenter');
+    // 当访问的地址和当前服务器地址一样，就可以省略前面部分
+    res.redirect('/usercenter');
+    // 不会修改网址。
+    // res.sendFile(resolve(__dirname, '../public/user-center.html'));
   } else {
     // 一般不会具体返回是用户名错误还是密码错误
     // 反正别人试密码
