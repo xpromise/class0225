@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+  ejs文件中，有特殊的语法，通过语法来使用模板资源渲染的数据
+    < %  % > 没有任何输出到页面上. 能在html中执行任意js代码
+    < %=  % > 输出转义后的数据到页面上。 一般使用转义后的数据。
+      对用户所有输入的数据都进行转义处理。
+      服务器输出的数据也会进行转义处理。
+    < %-  % > 输出非转义的数据到页面上
+-->
+
+<% arr.forEach(function (item, index) { %>
+  <p><%= index %></p>
+<% }) %>
+
+<ul>
+  <li>姓名：<%= person.name %></li>
+  <li>年龄：<%- person.age %></li>
+</ul>
+
+
+<script type="text/javascript">
+  // console.log(data);
+</script>
+</body>
+</html>
