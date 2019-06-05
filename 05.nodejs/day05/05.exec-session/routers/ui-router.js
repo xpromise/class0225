@@ -22,8 +22,8 @@ router.get('/register', (req, res) => {
 
 // 为了重定向能够找到当前路由，返回user-center页面
 router.get('/usercenter', cookieParser(), async (req, res) => {
-  // 获取cookie，判断用户是否登录成功过。就能访问，失败不能访问，就请先登录
-  const { user } = req.cookies;
+  // 获取session
+  const { user } = req.session;
 
   if (user) {
     // 判断user是否合法

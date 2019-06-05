@@ -23,6 +23,10 @@ const app = express();
         res.cookie('user', 'sunwukong');
       持久化cookie
         res.cookie('user', 'sunwukong', {maxAge: 1000 * 3600 * 24 * 365 * 10});
+    6. 缺点：
+      1. 大小：一个网址：数量为20个左右，大小为4kb左右
+      2. 传输流量较大。通信过程中产生的流量
+      3. 安全性较低：数据直接存储在浏览器端。
  */
 
 // 使用第三方中间件，解析cookie数据
