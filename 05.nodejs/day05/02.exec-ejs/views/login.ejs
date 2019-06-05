@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+  <style>
+    .err-msg{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<h1>用户登录</h1>
+<form action="/login" method="post">
+  <p class="err-msg"><%= errMsg.err %></p>
+  用户名: <input type="text" name="username"> <span class="err-msg"><%= errMsg.usernameErr %></span> <br><br>
+  密码: <input type="password" name="password"> <span class="err-msg"><%= errMsg.passwordErr %></span> <br><br>
+  <input type="submit" value="登录">
+</form>
+</body>
+</html>
