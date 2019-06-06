@@ -67,7 +67,7 @@ app.get('/js/index.js', (req, res) => {
           res.status(304).end();
         } else {
           // 在看last-modified
-          const ifModifiedSince = req.headers['if-modified-since'];
+          const ifModifiedSince = Date.parse(req.headers['if-modified-since']);
           if (ifModifiedSince === lastModified) {
             // 命中了协商缓存
             res.status(304).end();
@@ -81,7 +81,7 @@ app.get('/js/index.js', (req, res) => {
       } else {
         // 第一次请求, 没有命中协商缓存
         // 首次
-        res.set('cache-control', 'max-age=10'); // 强制资源缓存一天
+        res.set('cache-control', 'max-age=10'); // 强制资源缓存10s
         res.set('expires', new Date().toGMTString());
         res.set('etag', etag);
         res.set('last-modified', lastModified.toGMTString());
