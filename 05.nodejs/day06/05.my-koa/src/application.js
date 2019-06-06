@@ -28,7 +28,7 @@ module.exports = class Application {
     }
   }
 
-}
+};
 
 // 高阶函数：执行函数返回另外一个函数。
 // 给内部函数传参的
