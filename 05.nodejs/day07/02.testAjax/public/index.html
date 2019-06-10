@@ -15,6 +15,7 @@
    */
 
   let TIME = 3000;
+  let xhr = null;
 
   const btn = document.getElementById('btn');
 
@@ -23,14 +24,17 @@
 
   // 发送请求函数
   function sendAjax() {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log(xhr.responseText);
-      }
-    };
-    xhr.open('GET', '/ajax');
-    xhr.send();
+
+    if (xhr) {
+      // 说明之前发送过ajax请求
+      // 取消ajax请求。 （请求已经发送出去了，取消接收响应结果）
+      xhr.abort();
+      // 重新发送新的请求
+      ajax();
+    } else {
+      ajax();
+    }
+
     let time = TIME / 1000;
     // 文字提示
     btn.innerText = `已发送(${time}s)`;
@@ -45,6 +49,18 @@
       }
     }, 1000)
 
+  }
+
+  function ajax() {
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+        xhr = null;
+      }
+    };
+    xhr.open('GET', '/ajax');
+    xhr.send();
   }
 
   // 节流函数

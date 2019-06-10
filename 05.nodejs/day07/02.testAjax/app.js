@@ -5,7 +5,9 @@ app.use(express.static('public'));
 
 app.get('/ajax', (req, res) => {
   console.log('接收到请求了~');
-  res.end('9527');
+  setTimeout(() => {
+    res.end('9527');
+  }, 5000)
 });
 
 app.listen(3000, (err) => {
