@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery中ajax</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+  // 使用jquery发送ajax请求
+  $('#btn').click(function () {
+      /* $.ajax('/ajax', {
+         method: 'GET', // 请求方式
+         data: {  // 请求参数
+           name: 'jack',
+           age: 18
+         },
+         headers: { // 请求头
+           xxx: 'xxxxx'
+         },
+         success: function (data) { // 成功的回调函数
+           console.log(data);
+         },
+         error: function (error) { // 失败的回调函数
+           console.log(error);
+         }
+       });*/
+
+      /*$.ajax('/ajax', {
+         method: 'POST', // 请求方式
+         data: {  // 请求参数
+           name: 'jack',
+           age: 18
+         },
+         headers: { // 请求头
+           xxx: 'xxxxx'
+         },
+         success: function (data) { // 成功的回调函数
+           console.log(data);
+         },
+         error: function (error) { // 失败的回调函数
+           console.log(error);
+         }
+       })*/
+
+      /*
+      $.get('/ajax', {name: 'bob'}, function (data) {
+         console.log(data);
+       })
+       */
+      $.post('/ajax', {name: 'bob'}, function (data) {
+        console.log(data);
+      })
+  })
+</script>
+</body>
+</html>
