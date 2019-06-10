@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>原生ajax</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script type="text/javascript">
+  document.getElementById('btn').onclick = function () {
+    // 发送ajax请求，请求数据
+    /*
+      1. 创建xhr实例对象
+      2. 绑定事件监听
+      3. 设置请求信息
+      4. 发送请求
+     */
+
+    // 1. 创建xhr实例对象
+    const xhr = new XMLHttpRequest();
+    // 2. 绑定事件监听: 用来接收响应
+    // 当readystate的值发生变化，会触发当前事件
+    /*
+      readystate的值：
+        0：open方法还未调用。 刚刚创建xhr对象，初始化状态为0
+        1：send方法还未调用。（请求还没有发送，还可以设置请求信息）
+        2：send方法已经调用。（已经发送了请求，接收到了部分响应数据：响应首行、响应头）
+        3：接收到了部分响应体数据。（如果响应数据较小，就全部接收完毕。若果较大，就只接受到一部分）
+        4：接收到了全部响应体数据。
+     */
+    xhr.onreadystatechange = function () {
+      // console.log(xhr.readyState);
+      /*if (xhr.readyState === 3) {
+        // 响应状态码
+        console.log(xhr.status);
+        // 响应头
+        console.log(xhr.getResponseHeader('Content-Type'));
+        // 接收到了部分响应体数据
+        console.log(xhr.responseText);
+      }
+
+      if (xhr.readyState === 4) {
+        // 说明接收到了全部响应体数据
+        console.log(xhr.responseText);
+      }*/
+
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // 接收到了全部数据并且响应式成功的
+        console.log(xhr.responseText);
+      }
+    };
+    // 3. 设置请求信息: 请求方式、请求地址、请求参数。（请求头）
+    xhr.open('GET', 'http://localhost:3000/ajax?username=jack&age=18');
+    xhr.setRequestHeader('xxx', 'xxxx');
+    // 4. 发送请求
+    xhr.send();
+
+  }
+</script>
+</body>
+</html>
