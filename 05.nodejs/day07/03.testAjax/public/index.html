@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jquery的练习</title>
+</head>
+<body>
+<select id="province">
+  <option>请选择省份</option>
+</select> 省
+
+<select id="city">
+  <option>请选择市</option>
+</select> 市
+
+<select id="county">
+  <option>请选择区(县)</option>
+</select> 区(县)
+
+<script type="text/javascript" src="./js/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+  // $.ready事件： 等DOM加载完成就触发。 类似于DOMContentLoaded
+  $(function () {
+    // 获取DOM元素
+    const $province = $('#province');
+    const $city = $('#city');
+    const $county = $('#county');
+
+    // 一上来需要加载所有省份的数据。
+    // 发送请求，请求所有省份的数据
+    $.get('http://localhost:3000/province', function (result) {
+      if (result.code === 0) {
+        // 请求成功， 将请求的数据展示在页面上
+        /*
+        // 性能不够好，做了n次DOM操作
+        result.data.forEach((item) => {
+          $province.append(`<option>${item.name}</option>`);
+        })*/
+        // 将多次的DOM操作变成一次
+        const html = result.data.reduce((prev, curr) => prev + `<option value="${curr.province}">${curr.name}</option>`, '');
+        $province.append(html);
+      } else {
+        // 请求失败
+        alert(result.error);
+      }
+    })
+
+    // 给省份绑定change事件（当元素的value值发生变化触发的）
+    $province.change(function () {
+      // 当省份发生变化时，区县要清空
+      $county.html('<option>请选择区(县)</option>');
+
+      // console.log(this.value);
+      const province = this.value;
+      // 发送请求，请求指定省份的所有城市数据
+      $.get('/city', {province}, function (result) {
+        if (result.code === 0) {
+          // 展示城市数据
+          const html = result.data.reduce((prev, curr) => prev + `<option value="${curr.city}">${curr.name}</option>`, '<option>请选择市</option>');
+          $city.html(html);
+        } else {
+          alert(result.error);
+        }
+      })
+
+    })
+
+    $city.change(function () {
+      // 获取省份
+      const province = $province.val();
+      // 获取城市
+      const city = this.value;
+      // 发送请求
+      $.get('/county', {province, city}, function (result) {
+        if (result.code === 0) {
+          // 展示区县数据
+          const html = result.data.reduce((prev, curr) => prev + `<option value="${curr.county}">${curr.name}</option>`, '<option>请选择区(县)</option>');
+          $county.html(html);
+        } else {
+          alert(result.error);
+        }
+      })
+
+    })
+
+
+  })
+
+</script>
+</body>
+</html>

@@ -4,6 +4,8 @@ const Cities = require('./models/cities');
 
 const app = express();
 
+app.use(express.static('public'));
+
 (async () => {
   await db;
   // 响应省份数据
@@ -35,7 +37,16 @@ const app = express();
     }
   })
   // 响应区县数据
-
+  app.get('/county', async (req, res) => {
+    try {
+      // 获取请求参数
+      const { province, city } = req.query;
+      const result = await Cities.find({level: 3, province, city}, {name: 1, county: 1, _id: 0});
+      res.json({code: 0, data: result});
+    } catch (error) {
+      res.json({code: 1, error});
+    }
+  })
 
 })();
 
