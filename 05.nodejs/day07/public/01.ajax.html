@@ -45,15 +45,18 @@
       }*/
 
       if (xhr.readyState === 4 && xhr.status === 200) {
-        // 接收到了全部数据并且响应式成功的
+        // 接收到了全部数据并且响应式成功
         console.log(xhr.responseText);
       }
     };
     // 3. 设置请求信息: 请求方式、请求地址、请求参数。（请求头）
-    xhr.open('GET', 'http://localhost:3000/ajax?username=jack&age=18');
-    xhr.setRequestHeader('xxx', 'xxxx');
+    // xhr.open('GET', 'http://localhost:3000/ajax?username=jack&age=18');
+    xhr.open('POST', 'http://localhost:3000/ajax', true);
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
     // 4. 发送请求
-    xhr.send();
+    xhr.send('username=jack&age=18');
+
+    console.log('代码执行完了~');
 
   }
 </script>
