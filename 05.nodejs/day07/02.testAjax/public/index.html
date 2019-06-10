@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ajax练习</title>
+</head>
+<body>
+<input type="text" placeholder="请输入验证码">
+<button id="btn">点击发送验证码</button>
+<script type="text/javascript">
+  /*
+    1. 点击按钮，向服务器发送请求，请求验证码
+    2. 点击之后60s后才能在点：函数节流
+    3. 加上文字提示
+   */
+
+  let TIME = 3000;
+
+  const btn = document.getElementById('btn');
+
+  // 绑定事件监听
+  btn.onclick = throttle(sendAjax, TIME);
+
+  // 发送请求函数
+  function sendAjax() {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+      }
+    };
+    xhr.open('GET', '/ajax');
+    xhr.send();
+    let time = TIME / 1000;
+    // 文字提示
+    btn.innerText = `已发送(${time}s)`;
+    btn.disabled = 'disabled';
+    const timer = setInterval(() => {
+      btn.innerText = `已发送(${--time}s)`;
+      // 倒计时到点了，清除
+      if (time <= 0) {
+        clearInterval(timer);
+        btn.innerText = '点击发送验证码';
+        btn.disabled = '';
+      }
+    }, 1000)
+
+  }
+
+  // 节流函数
+  function throttle(fn, time) {
+    let lastTime = 0;
+    /*
+      箭头函数：
+        1. 没有自己的this，this指向离他最近包裹它的函数的this
+        2. 没有自己的arguments，arguments指向离他最近包裹它的函数的arguments
+     */
+    return function () {
+      const nowTime = Date.now();
+
+      if (nowTime - lastTime > time) {
+        // 超过了指定时间，可以触发
+        fn.apply(this, arguments);
+        // 同步时间
+        lastTime = nowTime;
+      }
+
+    }
+  }
+
+</script>
+</body>
+</html>

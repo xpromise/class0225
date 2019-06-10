@@ -8,7 +8,7 @@ app.get('/ajax', (req, res) => {
   console.log('服务器接收到请求了~');
   console.log(req.query);
 
-  res.send('这是服务器返回的响应~');
+  res.send('这是服务器返回的响应11111111111~');
 
 });
 

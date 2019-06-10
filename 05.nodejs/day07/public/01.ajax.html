@@ -50,11 +50,19 @@
       }
     };
     // 3. 设置请求信息: 请求方式、请求地址、请求参数。（请求头）
-    // xhr.open('GET', 'http://localhost:3000/ajax?username=jack&age=18');
-    xhr.open('POST', 'http://localhost:3000/ajax', true);
-    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+    /*
+      get请求：
+        chrome/firefox  第二次以后请求会缓存（类似于协商缓存，会访问服务器，再走缓存）
+        ie 第二次以后请求会缓存（类似于强制缓存，不会访问服务器，直接走缓存）
+          ie导致问题：如果后台数据更新了，ie因为没有访问服务器，所以拿不到最新的数据
+          解决：让每次请求不一样。 在请求参数加上随机数或时间戳。 浏览器就不会缓存get请求，就能得到最新的数据
+     */
+    xhr.open('GET', 'http://localhost:3000/ajax?username=jack&age=18&date=' + Date.now());
+    // xhr.open('POST', 'http://localhost:3000/ajax', true);
+    // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
     // 4. 发送请求
-    xhr.send('username=jack&age=18');
+    // xhr.send('username=jack&age=18');
+    xhr.send();
 
     console.log('代码执行完了~');
 
