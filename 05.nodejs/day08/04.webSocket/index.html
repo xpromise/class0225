@@ -17,13 +17,12 @@
   const socket = io('ws://localhost:4000');
 
   // 2. 发送消息给服务端
+  socket.emit('client_to_server', 'how old are you~');
+
+  // 3. 接收服务端发送的消息
   socket.on('server_to_client', (msg) => {
     console.log('服务端发送给客户端的消息', msg);
   });
-
-  // 3. 接收服务端发送的消息
-  socket.emit('client_to_server', 'how old are you~');
-
 
 </script>
 </body>

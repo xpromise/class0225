@@ -20,7 +20,7 @@ io.on('connect', (socket) => {
   // 当前客户端连接上时，主动推送一条消息给客户端
   // socket.emit('server_to_client', 'hello, nice to meet you!'); // 发送给当前连接上的客户端
   // io.emit('server_to_client', 'hello, nice to meet you!'); // 发送给所有连接上的客户端
-  // socket.broadcast.emit('server_to_client', 'hello, nice to meet you!'); // 发送给除了当前连接上的客户端所有连接上的客户端，
+  // socket.broadcast.emit('server_to_client', 'hello, nice to meet you!'); // 发送给除了当前连接上的其他所有连接上的客户端，
 });
 
 // 监听端口号
