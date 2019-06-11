@@ -16,7 +16,6 @@ app.get('/cors', (req, res) => {
   // cors方案
   const safeWeb = ['xxx', 'xxx', 'xxx'];
   console.log(req.headers.origin);
-  
   // res.set('access-control-allow-origin', '*'); // 允许所有网址进行跨域
   res.set('access-control-allow-origin', 'http://localhost:63342'); // 允许一个网址进行跨域
 
