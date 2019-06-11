@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsonp</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script type="text/javascript">
+  /*
+    1. 同源策略：浏览器安全策略
+      要求协议名、域名/ip、端口号必须完全一致。
+      只要有一个不一样就产生跨域。
+
+    2. 解决跨域：
+      - jsonp
+        原理：利用script标签天然可以跨域的特性进行跨域请求的
+        特点：
+          1. 只支持get请求。 （因为script标签只能发送get请求）
+          2. 兼容性极好
+      - cors
+        官方的解决方案。
+        特点：
+          1. 能支持任意方式请求
+          2. 兼容性较差
+   */
+  document.getElementById('btn').onclick = function () {
+    // 1. 创建script标签
+    const script = document.createElement('script');
+    // 2. 设置script标签的src属性。 向指定地址发送请求
+    script.src = 'http://localhost:3000/jsonp?callback=getDataCallback';
+    // 3. 设置请求成功的回调函数. 函数必须全局的函数
+    window.getDataCallback = function (data) {
+      console.log(data);
+    };
+    // 4. 将script标签添加到页面上生效
+    document.body.appendChild(script);
+  }
+</script>
+</body>
+</html>

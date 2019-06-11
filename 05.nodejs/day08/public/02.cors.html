@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $('#btn').click(function () {
+    $.get('http://localhost:3000/cors', function (data) {
+      console.log(data);
+    })
+  })
+</script>
+</body>
+</html>
