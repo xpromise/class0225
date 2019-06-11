@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>template</title>
+</head>
+<body>
+
+<div id="box"></div>
+
+<!-- 创建模板，id是为了找到它 -->
+<script type="text/html" id="tpl">
+  {{each target}}
+    <p>{{$index}} - {{$value}}</p>
+  {{/each}}
+</script>
+
+<script type="text/javascript" src="./template-web.js"></script>
+<script type="text/javascript">
+  /*
+    1. 引入template-web.js文件
+    2. 创建模板
+      - 创建script标签
+      - 将script标签的type属性改为 text/html
+      - 添加id
+    3. 将数据渲染到模板上
+    4. 将生成的标签字符串插入到页面中，才能生效
+   */
+  // 定义数据
+  const target = ['jack', 'bob', 'tom', 'lucy'];
+  // 将数据渲染到模板上
+  // res.render('login', { target })
+  const htmlStr = template('tpl', { target });
+  console.log(htmlStr);
+  // 将生成的标签字符串插入到页面中，才能生效
+  document.getElementById('box').innerHTML = htmlStr;
+
+</script>
+</body>
+</html>
