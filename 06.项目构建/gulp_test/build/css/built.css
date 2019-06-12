@@ -1,0 +1,18 @@
+#box1 {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+}
+#box1 p {
+  color: #1e89e6;
+  font-size: 25px;
+}
+
+#box2 {
+  width: 150px;
+  height: 150px;
+  background-color: darkblue;
+}
+#box2 p {
+  color: purple;
+}

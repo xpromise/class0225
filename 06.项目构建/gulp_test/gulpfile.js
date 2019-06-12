@@ -14,6 +14,11 @@ const babel = require('gulp-babel');
 const browserify = require('gulp-browserify');
 const rename = require("gulp-rename");
 const eslint = require('gulp-eslint');
+const less = require('gulp-less');
+const concat = require('gulp-concat');
+const livereload = require('gulp-livereload');
+const connect = require('gulp-connect');
+const open = require('open');
 
 // 2. 配置任务
 gulp.task('babel', function () {
@@ -23,6 +28,7 @@ gulp.task('babel', function () {
       presets: ['@babel/env']
     }))
     .pipe(gulp.dest('build/js')) // 将流中的文件写入到指定目录下（将文件输出到其他目录中去）
+    .pipe(livereload())
 });
 
 gulp.task('browserify', function() {
@@ -30,6 +36,7 @@ gulp.task('browserify', function() {
     .pipe(browserify())  // 将commonjs模块化转换成浏览器能识别的语法
     .pipe(rename('built.js')) // 对流中的文件进行重命名
     .pipe(gulp.dest('build/js'))
+    .pipe(livereload())
 });
 
 // 使用eslint必须加上配置项
@@ -52,9 +59,41 @@ gulp.task('eslint', () => {
   return gulp.src(['src/js/*.js'])
     .pipe(eslint()) // 语法检查
     .pipe(eslint.format()) // 提示错误
-    .pipe(eslint.failAfterError()); // 一旦出错了，就终止运行
+    .pipe(eslint.failAfterError()) // 一旦出错了，就终止运行
+    .pipe(livereload())
+});
+
+gulp.task('less', function () {
+  return gulp.src('./src/less/*.less')
+    .pipe(less()) // 将less文件编译成css文件
+    .pipe(concat('built.css'))  // 合并多个css文件
+    .pipe(gulp.dest('./build/css'))
+    .pipe(livereload())
+});
+
+// 配置自动化任务
+gulp.task('watch', function () {
+  // 开启一个服务器
+  livereload.listen();
+
+  // 开启运行项目的服务器
+  connect.server({
+    name: 'dev App',
+    root: 'build',
+    port: 3000,
+    livereload: true // 热更新，刷新页面
+  });
+
+  // 打开页面
+  open('http://localhost:3000');
+
+  // 监视指定文件的变化，一旦文件发生变化，就执行后续的任务进行处理
+  gulp.watch('./src/js/*.js', gulp.series(['eslint', 'babel', 'browserify']));
+  gulp.watch('./src/less/*.less', gulp.series(['less']));
 });
 
 // 3. 配置默认任务
-gulp.task('default', gulp.series(['eslint', 'babel', 'browserify'])); // 同步：执行完前面任务，才能后面任务
-// gulp.task('default', gulp.parallel(['babel', 'browserify'])); // 异步：同时执行多个任务，谁先做完谁先结束
+gulp.task('js', gulp.series(['eslint', 'babel', 'browserify'])); // 同步：执行完前面任务，才能后面任务
+gulp.task('default', gulp.parallel(['js', 'less'])); // 异步：同时执行多个任务，谁先做完谁先结束
+
+gulp.task('dev', gulp.series(['default', 'watch']));
