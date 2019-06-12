@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp dev",
+    "dev": "gulp dev",
+    "build": "gulp prod",
+    "dist": "gulp prod",
+    "prod": "gulp prod"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +21,13 @@
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.7.0",
+    "gulp-cssmin": "^0.2.0",
     "gulp-eslint": "^5.0.0",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-less": "^4.0.1",
     "gulp-livereload": "^4.0.1",
     "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.2",
     "open": "^6.3.0"
   },
   "eslintConfig": {

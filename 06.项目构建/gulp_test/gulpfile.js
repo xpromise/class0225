@@ -20,6 +20,10 @@ const livereload = require('gulp-livereload');
 const connect = require('gulp-connect');
 const open = require('open');
 
+const uglify = require('gulp-uglify');
+const cssmin = require('gulp-cssmin');
+const htmlmin = require('gulp-htmlmin');
+
 // 2. 配置任务
 gulp.task('babel', function () {
 
@@ -63,6 +67,12 @@ gulp.task('eslint', () => {
     .pipe(livereload())
 });
 
+gulp.task('html', () => {
+  return gulp.src('./src/index.html')
+    .pipe(gulp.dest('./build'))
+    .pipe(livereload())
+});
+
 gulp.task('less', function () {
   return gulp.src('./src/less/*.less')
     .pipe(less()) // 将less文件编译成css文件
@@ -90,10 +100,42 @@ gulp.task('watch', function () {
   // 监视指定文件的变化，一旦文件发生变化，就执行后续的任务进行处理
   gulp.watch('./src/js/*.js', gulp.series(['eslint', 'babel', 'browserify']));
   gulp.watch('./src/less/*.less', gulp.series(['less']));
+  gulp.watch('./src/index.html', gulp.series(['html']));
+
 });
+
+// 生产上线用的代码的任务
+gulp.task('uglify', () => {
+  return gulp.src('./build/js/built.js')
+    .pipe(uglify())
+    .pipe(rename('dist.min.js'))
+    .pipe(gulp.dest('./dist/js'))
+});
+
+
+gulp.task('cssmin', () => {
+  return gulp.src('./build/css/built.css')
+    .pipe(cssmin())
+    .pipe(rename('dist.min.css'))
+    .pipe(gulp.dest('./dist/css'))
+});
+
+gulp.task('htmlmin', () => {
+  return gulp.src('./build/index.html')
+    .pipe(htmlmin({
+      collapseWhitespace: true, // 去除多余空格
+      removeComments: true // 去除注释
+    }))
+    .pipe(gulp.dest('./dist'))
+});
+
 
 // 3. 配置默认任务
 gulp.task('js', gulp.series(['eslint', 'babel', 'browserify'])); // 同步：执行完前面任务，才能后面任务
-gulp.task('default', gulp.parallel(['js', 'less'])); // 异步：同时执行多个任务，谁先做完谁先结束
+gulp.task('development', gulp.parallel(['js', 'less', 'html'])); // 异步：同时执行多个任务，谁先做完谁先结束
+// 开发环境：1. 代码能正常运行。 2. 自动化任务
+gulp.task('dev', gulp.series(['development', 'watch']));
 
-gulp.task('dev', gulp.series(['default', 'watch']));
+// 生产环境： 生成上线用的代码
+gulp.task('production', gulp.parallel(['uglify', 'cssmin', 'htmlmin']));
+gulp.task('prod', gulp.series('development', 'production'));
