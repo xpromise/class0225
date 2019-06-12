@@ -129,7 +129,6 @@ gulp.task('htmlmin', () => {
     .pipe(gulp.dest('./dist'))
 });
 
-
 // 3. 配置默认任务
 gulp.task('js', gulp.series(['eslint', 'babel', 'browserify'])); // 同步：执行完前面任务，才能后面任务
 gulp.task('development', gulp.parallel(['js', 'less', 'html'])); // 异步：同时执行多个任务，谁先做完谁先结束
