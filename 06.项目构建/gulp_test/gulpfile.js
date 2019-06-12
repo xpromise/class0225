@@ -11,6 +11,9 @@
 // 1. 引入
 const gulp = require('gulp');
 const babel = require('gulp-babel');
+const browserify = require('gulp-browserify');
+const rename = require("gulp-rename");
+const eslint = require('gulp-eslint');
 
 // 2. 配置任务
 gulp.task('babel', function () {
@@ -20,5 +23,38 @@ gulp.task('babel', function () {
       presets: ['@babel/env']
     }))
     .pipe(gulp.dest('build/js')) // 将流中的文件写入到指定目录下（将文件输出到其他目录中去）
-
 });
+
+gulp.task('browserify', function() {
+  return gulp.src('build/js/app.js')
+    .pipe(browserify())  // 将commonjs模块化转换成浏览器能识别的语法
+    .pipe(rename('built.js')) // 对流中的文件进行重命名
+    .pipe(gulp.dest('build/js'))
+});
+
+// 使用eslint必须加上配置项
+/*
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,  // 能使用es6
+      "sourceType": "module" // 能使es6模块化
+    },
+    "extends": "eslint:recommended", // 使用eslint推荐默认配置
+    "rules": {
+      "no-console": 0 // 忽略 no-console 检查项
+    },
+    "env": {
+      "browser": true  // 添加browser环境，允许使用浏览器的全局变量
+    }
+  }
+ */
+gulp.task('eslint', () => {
+  return gulp.src(['src/js/*.js'])
+    .pipe(eslint()) // 语法检查
+    .pipe(eslint.format()) // 提示错误
+    .pipe(eslint.failAfterError()); // 一旦出错了，就终止运行
+});
+
+// 3. 配置默认任务
+gulp.task('default', gulp.series(['eslint', 'babel', 'browserify'])); // 同步：执行完前面任务，才能后面任务
+// gulp.task('default', gulp.parallel(['babel', 'browserify'])); // 异步：同时执行多个任务，谁先做完谁先结束
