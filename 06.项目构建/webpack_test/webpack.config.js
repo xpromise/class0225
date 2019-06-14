@@ -5,6 +5,8 @@
 
 const { resolve } = require('path');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   // 入口
   entry: './src/js/app.js', // webpack会自动解析依赖关系
@@ -14,7 +16,7 @@ module.exports = {
     filename: './js/built.js', // 输出后文件名称：只指js文件
   },
   // 加载器
-  module: {
+  module: { // loader处理的资源需要引入才能找到
     rules: [ // 在数组中写所有loader规则
       {
         // 错误：Module not found: Error: Can't resolve 'style-loader'。  /  cannot find module 'css-loader'
@@ -70,9 +72,31 @@ module.exports = {
           },
           "eslint-loader"
         ]
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader'  // 处理html中图片
+        }
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|mp3|mp4)$/,
+        exclude: /\.(js|less|json|png|jpe?g|gif|webp)$/,
+        use: {
+          loader: 'file-loader', // 复制文件输出到另外一个地方
+          options: {
+            outputPath: 'media',
+            name: '[hash:8].[ext]'
+          }
+        }
       }
     ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({ // 不能处理html中的图片
+      template: './src/index.html', // 以指定html文件为模板，创建新的html文件。 会自动引入打包后输出的js/css文件
+    }),
+  ],
   // 模式
   mode: 'development'
 };
