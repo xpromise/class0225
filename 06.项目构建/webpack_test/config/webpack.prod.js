@@ -63,6 +63,30 @@ module.exports = {
               outputPath: 'images', // 只改变图片输出到本地的位置。不会修改url路径  和output.path一起处理
               name: '[hash:8].[ext]' // 修改输出的文件名称
             }
+          },
+          {
+            loader: 'img-loader',
+            options: {
+              plugins: [
+                require('imagemin-gifsicle')({
+                  interlaced: false
+                }),
+                require('imagemin-mozjpeg')({
+                  progressive: true,
+                  arithmetic: false
+                }),
+                require('imagemin-pngquant')({
+                  floyd: 0.5,
+                  speed: 2
+                }),
+                require('imagemin-svgo')({
+                  plugins: [
+                    { removeTitle: true },
+                    { convertPathData: false }
+                  ]
+                })
+              ]
+            }
           }
         ]
       },
@@ -102,6 +126,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ // 不能处理html中的图片
       template: './src/index.html',
+      minify: {
+        collapseWhitespace: true, // 去除空格
+        removeComments: true // 去除注释
+      }
     }),
     new MiniCssExtractPlugin({ // 提取css成单独文件
       filename: 'css/[name].[hash:8].css',
