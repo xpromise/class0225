@@ -27,6 +27,49 @@ module.exports = {
         }, {
           loader: "less-loader" // 将less编译成css
         }]
+      },
+      {
+        test: /\.(png|jpe?g|gif|webp)$/,
+        use: [ // 使用多个loader时，用use
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192, // 限制 8 * 1024 = 8 kb。 8kb以下的图片会被base64处理
+              publicPath: '../build/images', // less文件中图片的url会加上publicPath的值
+              outputPath: 'images', // 只改变图片输出到本地的位置。不会修改url路径
+              name: '[hash:8].[ext]' // 修改输出的文件名称
+            }
+          }
+        ]
+      },
+      /*{ // 需要在package.json加上配置
+        test: /\.js$/,
+        exclude: /node_modules/, // 排除指定目录下所有文件
+        loader: "eslint-loader",  // 使用一个loader，就直接写loader
+      },
+      // npm install babel-loader @babel/core @babel/preset-env -D
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'] // 告诉babel使用什么规则编译js代码
+          }
+        }
+      },*/
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'] // 告诉babel使用什么规则编译js代码
+            }
+          },
+          "eslint-loader"
+        ]
       }
     ]
   },

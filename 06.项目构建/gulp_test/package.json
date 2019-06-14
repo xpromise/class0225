@@ -27,7 +27,7 @@
     "gulp-less": "^4.0.1",
     "gulp-livereload": "^4.0.1",
     "gulp-rename": "^1.4.0",
-    "gulp-uglify": "^3.0.2",
+    "gulp-ugl\"eslintConfig\": {\n    \"parserOptions\": {\n      \"ecmaVersion\": 6,\n      \"sourceType\": \"module\"\n    },\n    \"extends\": \"eslint:recommended\",\n    \"rules\": {\n      \"no-console\": 0\n    },\n    \"env\": {\n      \"browser\": true\n    }\n  }ify": "^3.0.2",
     "open": "^6.3.0"
   },
   "eslintConfig": {
