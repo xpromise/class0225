@@ -1,6 +1,9 @@
 /*
   当前文件就是webpack的配置文件。
   当执行webpack指令时，会默认找的配置文件
+
+  1. 去除dev-server的配置
+  2. 将mode改为production
  */
 
 const { resolve } = require('path');
@@ -9,11 +12,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   // 入口
-  entry: './src/js/app.js', // webpack会自动解析依赖关系
+  entry: './src/js/app.js', // 指令是在webpack_test下运行的，以webpack_test为根目录
   // 输出
   output: {
-    path: resolve(__dirname, 'build'), // 打包后文件输出的目录，绝对路径
-    filename: './js/built.js', // 输出后文件名称：只指js文件
+    path: resolve(__dirname, '../build'), // __dirname 是nodejs模块的变量，变量的值就看模块所处的位置
+    filename: './js/[hash:8].js', // 输出后文件名称：只指js文件
   },
   // 加载器
   module: { // loader处理的资源需要引入才能找到
@@ -37,29 +40,13 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192, // 限制 8 * 1024 = 8 kb。 8kb以下的图片会被base64处理
-              publicPath: '../build/images', // less文件中图片的url会加上publicPath的值
-              outputPath: 'images', // 只改变图片输出到本地的位置。不会修改url路径
+              publicPath: 'images', // less文件中图片的url会加上publicPath的值 和图片的url路径一起处理
+              outputPath: 'images', // 只改变图片输出到本地的位置。不会修改url路径  和output.path一起处理
               name: '[hash:8].[ext]' // 修改输出的文件名称
             }
           }
         ]
       },
-      /*{ // 需要在package.json加上配置
-        test: /\.js$/,
-        exclude: /node_modules/, // 排除指定目录下所有文件
-        loader: "eslint-loader",  // 使用一个loader，就直接写loader
-      },
-      // npm install babel-loader @babel/core @babel/preset-env -D
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'] // 告诉babel使用什么规则编译js代码
-          }
-        }
-      },*/
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
@@ -81,7 +68,7 @@ module.exports = {
       },
       {
         test: /\.(eot|svg|ttf|woff|mp3|mp4)$/,
-        exclude: /\.(js|less|json|png|jpe?g|gif|webp)$/,
+        // exclude: /\.(js|less|json|png|jpe?g|gif|webp)$/,
         use: {
           loader: 'file-loader', // 复制文件输出到另外一个地方
           options: {
@@ -94,9 +81,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ // 不能处理html中的图片
-      template: './src/index.html', // 以指定html文件为模板，创建新的html文件。 会自动引入打包后输出的js/css文件
-    }),
+      template: './src/index.html',
+    })
   ],
   // 模式
-  mode: 'development'
+  mode: 'production',
+
 };
