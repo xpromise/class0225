@@ -12,8 +12,34 @@
   <script type="text/javascript" src="../js/react.development.js"></script>
   <script type="text/javascript" src="../js/react-dom.development.js"></script>
   <script type="text/javascript" src="../js/babel.min.js"></script>
-
   <script type="text/babel">
+    // 定义工厂函数组件（简单）
+    function MyComponent1() {
+      console.log(this); // undefined
+      return <h2>工厂函数组件</h2>;
+    }
+
+    // 定义ES6类组件(复杂)
+    class MyComponent2 extends React.Component {
+      // 渲染方法
+      render() {
+        console.log(this); // 组件实例对象
+        return <h2>ES6类组件</h2>;
+      }
+    }
+
+    /*
+      定义组件的注意事项：
+        1. 组件名首字符必须大写
+        2. 组件标签必须有结束符：
+          可以是单标签自结束标签： 组件标签内没有内容
+          也可以是双标签： 组件标签内有内容
+     */
+
+
+    // 渲染
+    ReactDOM.render(<MyComponent1 />, document.getElementById('example1'));
+    ReactDOM.render(<MyComponent2 />, document.getElementById('example2'));
   </script>
 </body>
 </html>
