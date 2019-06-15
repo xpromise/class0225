@@ -18,6 +18,52 @@
     1. 显示h2标题, 初始文本为: 你喜欢我
     2. 点击标题更新为: 我喜欢你
   */
+  /*
+    什么时候使用state?
+      当用户界面发生变化，通过控制state来控制更新
+   */
+
+  // 定义组件
+  class Like extends React.Component {
+    /*constructor() {
+      super();
+      // 初始化状态数据
+      this.state = {
+        isLikeMe: false
+      };
+      // 这个函数只会执行一次
+      // this.handleClick.bind(this) --> 生成新函数，新函数代码和原函数一样，但是this指向不一样
+      this.handleClick = this.handleClick.bind(this);
+    }*/
+    // 初始化状态数据
+    state = {
+      isLikeMe: false
+    };
+
+
+    handleClick = () => {
+      // 只要自定义函数是箭头函数，this就指向实例对象
+      // console.log(this); // undefined. React中类组件自定义方法this默认是undefined，其他方法this指向实例对象
+      // 获取state的值
+      const { isLikeMe } = this.state;
+      // 修改state的值
+      // this.state.isLikeMe = !isLikeMe;  不可取
+      this.setState({
+        isLikeMe: !isLikeMe
+      });
+    }
+
+    render() {
+      // 读取状态数据的值
+      const { isLikeMe } = this.state;
+
+      return <h2 onClick={this.handleClick}>{isLikeMe ? '你喜欢我' : '我喜欢你'}</h2>;
+    }
+  }
+
+  // 渲染
+  ReactDOM.render(<Like />, document.getElementById('example'));
+
 </script>
 </body>
 </html>

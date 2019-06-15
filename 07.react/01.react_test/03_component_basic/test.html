@@ -24,7 +24,10 @@
       // 渲染方法
       render() {
         console.log(this); // 组件实例对象
-        return <h2>ES6类组件</h2>;
+        return <div>
+          <h2>ES6类组件</h2>
+          <p>hello</p>
+        </div>;
       }
     }
 
@@ -34,8 +37,8 @@
         2. 组件标签必须有结束符：
           可以是单标签自结束标签： 组件标签内没有内容
           也可以是双标签： 组件标签内有内容
+        3. 元素必须有一个根标签
      */
-
 
     // 渲染
     ReactDOM.render(<MyComponent1 />, document.getElementById('example1'));
