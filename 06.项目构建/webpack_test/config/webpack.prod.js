@@ -11,14 +11,18 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   // 入口
-  entry: './src/js/app.js', // 指令是在webpack_test下运行的，以webpack_test为根目录
+  entry: {
+    main: './src/js/app.js',
+    page1: './src/js/module2.js'
+  }, // 指令是在webpack_test下运行的，以webpack_test为根目录
   // 输出
   output: {
     path: resolve(__dirname, '../build'), // __dirname 是nodejs模块的变量，变量的值就看模块所处的位置
-    filename: 'js/[hash:8].js', // 输出后文件名称：只指js文件
+    filename: 'js/[name].[contenthash:8].js', // 输出后文件名称：只指js文件
     publicPath: '/', // 所有输出的资源都会加上/
   },
   // 加载器
@@ -97,7 +101,8 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'] // 告诉babel使用什么规则编译js代码
+              presets: ['@babel/preset-env'], // 告诉babel使用什么规则编译js代码
+              cacheDirectory: true // 使用缓存来缓存编译后结果
             }
           },
           "eslint-loader"
@@ -132,7 +137,7 @@ module.exports = {
       }
     }),
     new MiniCssExtractPlugin({ // 提取css成单独文件
-      filename: 'css/[name].[hash:8].css',
+      filename: 'css/[name].[contenthash:8].css',
       // chunkFilename: '[id].[hash:8].css',
     }),
     new OptimizeCssAssetsPlugin({ // 压缩css
@@ -142,9 +147,43 @@ module.exports = {
         preset: ['default', { discardComments: { removeAll: true } }],
       },
       // canPrint: true
+    }),
+    new WorkboxPlugin.GenerateSW({
+      // 这些选项帮助 ServiceWorkers 快速启用
+      // 不允许遗留任何“旧的” ServiceWorkers
+      clientsClaim: true,
+      skipWaiting: true
     })
   ],
   // 模式
   mode: 'production',
+  // 代码分割
+  optimization: {
+    splitChunks: {
+      // maxAsyncRequests: 5,
+      // maxInitialRequests: 3, // 入口3个
+      // automaticNameDelimiter: '~', // 扩展输出文件名
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,  // 权重
+          name: 'vendor',
+          chunks: "all", // 对所有模块进行处理
+          minSize: 0, // 提取最小的公共模块大小
+          minChunks: 1, // 提取的chunk 最少被引用1次
+        },
+        common: {
+          test: resolve(__dirname, '../src/js'), // 对什么目录的文件进行处理
+          priority: -20,
+          name: 'common', // 输出的chunk的name
+          chunks: "all", // 对所有模块进行处理
+          minSize: 0, // 提取最小的公共模块大小
+          minChunks: 2, // 提取的chunk 最少被引用2次
+        }
+      }
+
+    }
+  }
 
 };

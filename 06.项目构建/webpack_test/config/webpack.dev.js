@@ -67,7 +67,7 @@ module.exports = {
         exclude: /(node_modules)/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: 'babel-loader', // 将ES6其他语法转换ES5以下
             options: {
               presets: ['@babel/preset-env'] // 告诉babel使用什么规则编译js代码
             }

@@ -1,5 +1,7 @@
+import {debounce, throttle} from './module3';
 
-const sum = (...args) => args.reduce((p, c) => p + c, 0);
+const sum = debounce((...args) => args.reduce((p, c) => p + c, 0), 1000);
 
-// es6的模块化: 默认暴露
-export default sum;
+const add = throttle((x, y) => x + y, 2000);
+
+export {add, sum};

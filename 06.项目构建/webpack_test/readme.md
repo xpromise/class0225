@@ -21,3 +21,17 @@
   * mode
     * development 开发环境
     * production 生产环境（压缩代码）
+    
+## 优化手段
+* tree shaking
+  * 去除无用代码。
+  * 在生产环境下，UglifyjsWebpackPlugin自动压缩js代码。此时会自动去除未引用代码
+* 缓存
+  * babel缓存 cacheDirectory: true
+  * 将命名的hash（由webpack生成，只要里面有一个文件变化，hash值就会变） 改为 contenthash（根据文件内容生成hash值）
+* 代码分割
+  * optimization.splitChunks  提取公共代码。
+* pwa
+  * 渐进式网络应用：
+    * 接近native app体验
+    * 离线可访问
