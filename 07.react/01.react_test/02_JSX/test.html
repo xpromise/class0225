@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>02_JSX</title>
+</head>
+<body>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript">
+    // 创建虚拟DOM对象
+    const vDom3 = React.createElement('span', {}, 'Hello React~~');
+    const vDom1 = React.createElement('h2', {id: 'myId1', className: 'myClass1'}, vDom3);
+    // 将虚拟DOM对象渲染到页面指定容器中
+    ReactDOM.render(vDom1, document.getElementById('test1'));
+  </script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    // 创建虚拟DOM对象
+    const id = "myId2";
+    const content = 'Hello React~~~~';
+    /*
+      jsx:
+        1. 以<开头，会当作标签解析。（html同名标签会当作html同名元素解析，不是html同名标签，当作组件解析）
+        2. 当标签中需要使用js代码。用{}包裹
+     */
+    const vDom2 = <h2 id={id} className="myClass2">
+      <span>{content}</span>
+    </h2>;
+    console.log(vDom2);
+    // 将虚拟DOM对象渲染到页面指定容器中
+    ReactDOM.render(vDom2, document.getElementById('test2'));
+  </script>
+</body>
+</html>
