@@ -13,6 +13,58 @@
   <script type="text/javascript" src="../js/prop-types.js"></script>
   <script type="text/javascript" src="../js/babel.min.js"></script>
   <script type="text/babel">
+    /*
+      组件化编码流程：
+        1. 拆分组件
+          - 根据页面的功能效果或者变化来拆分组件：
+            - App 应用主/根组件
+            - AddTodo 添加待办事项组件
+            - TodoList 显示待办事项组件
+        2. 实现静态组件
+          - 将拆分的组件全部定义好，只定义包含html、css的纯静态组件
+        3. 实现动态组件
+          - 需不需要定义state？ 因为页面有变化，所以需要定义state
+          - state定义成什么？
+            - 要保存的数据是什么？ 变化的内容是什么
+            - 以什么样的方式保存？ 数组：方便遍历展示
+          - state定义在哪个组件中？
+            如果是单个组件用，就定义在单个组件内
+            如果多个组件内，就定义在公共的父组件中（这样父组件就能通过props的方式传递数据给子组件）
+     */
+
+    // 定义三个组件
+    // App
+    class App extends React.Component {
+      render() {
+        return <div>
+          <h2>simple todo list</h2>
+          <AddTodo />
+          <TodoList />
+        </div>
+      }
+    }
+    // AddTodo
+    class AddTodo extends React.Component {
+      render() {
+        return <div>
+          <input type="text"/>
+          <button>Add #3</button>
+        </div>
+      }
+    }
+    // TodoList
+    class TodoList extends React.Component {
+      render() {
+        return <ul>
+          <li>吃饭</li>
+          <li>睡觉</li>
+          <li>抱小郭德纲</li>
+        </ul>
+      }
+    }
+
+    // 渲染
+    ReactDOM.render(<App />, document.getElementById('example'));
 
   </script>
 </body>
