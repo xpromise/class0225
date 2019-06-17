@@ -19,6 +19,60 @@
       2. 点击按钮, 提示第一个输入框中的值
       3. 当第2个输入框失去焦点时, 提示这个输入框中的值
    */
+
+    class Input extends React.Component {
+
+      /*constructor() {
+        super();
+
+        this.createRef = React.createRef();
+        console.log(this.createRef); // 默认值：{current: null}
+      }*/
+
+      // 给实例对象添加的直接属性
+      createRef = React.createRef();
+
+      // 给实例对象添加直接方法
+      handleClick = () => {
+        // 箭头函数，this才能是组件的实例对象
+        // 获取input的值
+        // const value = this.refs.stringRef.value;
+        // const value = this.funcRef.value;
+        const value = this.createRef.current.value;
+        // 提示出来
+        alert(value);
+        // 清空数据
+        this.createRef.current.value = '';
+      };
+
+      // 失去焦点事件的回调函数
+      handleBlur = (event) => {
+        // console.log(event.target);
+        const value = event.target.value;
+        alert(value);
+      };
+
+      // 给原型上添加方法
+      render() {
+        console.log(this);
+
+        return <div>
+          {/*
+          stringRef：使用简单，但是即将废弃，不推荐使用
+          <input type="text" ref="stringRef" />
+          */}
+          {/*
+          funcRef: 使用简单，比stringRef性能更好
+          <input type="text" ref={(input) => this.funcRef = input} />*/}
+          <input type="text" ref={this.createRef} />
+          <button onClick={this.handleClick}>点击提示数据</button>
+          <input type="text" placeholder="失去焦点提示数据" onBlur={this.handleBlur}/>
+        </div>
+      }
+    }
+
+    ReactDOM.render(<Input/>, document.getElementById('example'));
+
   </script>
 </body>
 </html>
