@@ -17,6 +17,94 @@
     2. 输入用户名密码后, 点击登陆提示输入信息
     3. 不提交表单
   */
+
+  /*class Form extends React.Component {
+    usernameInput = React.createRef();
+    passwordInput = React.createRef();
+
+    handleSubmit = (e) => {
+      // 禁止表单的默认提交行为
+      e.preventDefault();
+      // 收集表单数据
+      const username = this.usernameInput.current.value;
+      const password = this.passwordInput.current.value;
+      alert(`用户名: ${username}   密码：${password}`);
+    }
+
+    render() {
+      return <form onSubmit={this.handleSubmit}>
+        用户名：<input type="text" ref={this.usernameInput}/>
+        密码：<input type="password" ref={this.passwordInput}/>
+        <input type="submit" value="登录"/>
+      </form>
+    }
+  }*/
+
+  // 受控组件： 通过state和change事件来实现，用来收集表单数据
+  class Form extends React.Component {
+    state = {
+      username: '',
+      password: ''
+    }
+
+    handleSubmit = (e) => {
+      // 禁止表单的默认提交行为
+      e.preventDefault();
+      // 收集表单数据
+      const { username, password } = this.state;
+
+      alert(`用户名: ${username}   密码：${password}`);
+      // 清空状态数据
+      this.setState({
+        username: '',
+        password: ''
+      })
+    }
+
+    /*handleUsername = (e) => {
+      // 获取用户输入的值
+      const username = e.target.value;
+      // 更新
+      this.setState({
+        username
+      })
+    }
+
+    handlePassword = (e) => {
+      // 获取用户输入的值
+      const password = e.target.value;
+      // 更新
+      this.setState({
+        password
+      })
+    }*/
+
+    // 高阶函数：1. 参数是函数  2. 返回值是函数
+    /*handleChange = (stateName) => {
+      // 获取用户输入的值: e.target.value
+      // 更新：
+      return (e) => {
+        this.setState({
+          [stateName]: e.target.value
+        })
+      }
+    }*/
+
+    handleChange = (stateName) => (e) => this.setState({[stateName]: e.target.value})
+
+    render() {
+      const { username, password } = this.state;
+
+      return <form onSubmit={this.handleSubmit}>
+        用户名：<input type="text" onChange={this.handleChange('username')} value={username} />
+        密码：<input type="password" onChange={this.handleChange('password')} value={password}/>
+        <input type="submit" value="登录"/>
+      </form>
+    }
+  }
+
+  ReactDOM.render(<Form/>, document.getElementById('example'));
+  
 </script>
 </body>
 </html>
