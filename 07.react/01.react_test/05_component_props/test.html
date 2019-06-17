@@ -10,6 +10,7 @@
 
 <script type="text/javascript" src="../js/react.development.js"></script>
 <script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
 <script type="text/javascript" src="../js/babel.min.js"></script>
 
 <script type="text/babel">
@@ -19,6 +20,59 @@
   1). 如果性别没有指定, 默认为男
   2). 如果年龄没有指定, 默认为18
   */
+
+  const person = {
+    name: 'jack',
+    age: 18,
+    sex: '男'
+  };
+
+  // 定义组件
+  class Person extends React.Component {
+    // static: 静态的。 通过static定义的方法，是在组件类上。组件的实例对象是没有办法使用的。
+    static propTypes = {
+      name: PropTypes.string.isRequired, // 组件会接受一个叫做name的属性，它的值为字符串类型，必须传
+      age: PropTypes.number,
+      sex: PropTypes.string, // 可传可不传
+    }
+
+    static defaultProps = {
+      age: 20,
+      sex: '女'
+    }
+
+
+    // 定义在原型上的方法，是给组件的实例对象使用的
+    render() {
+      // 获取标签属性
+      // console.log(this);
+      const { name, age, sex } = this.props;
+
+      return <ul>
+        <li>姓名：{name}</li>
+        <li>性别：{sex}</li>
+        <li>年龄：{age}</li>
+      </ul>
+    }
+  }
+
+  /*// 约束条件
+  Person.propTypes = {
+    name: PropTypes.string.isRequired, // 组件会接受一个叫做name的属性，它的值为字符串类型，必须传
+    age: PropTypes.number,
+    sex: PropTypes.string, // 可传可不传
+  };
+  // 默认值
+  Person.defaultProps = {
+    age: 20,
+    sex: '女'
+  };*/
+
+  // 渲染
+  // 通过标签属性的方式传递变化的数据（props）
+  // ReactDOM.render(<Person name={person.name} age={person.age} sex={person.sex}/>, document.getElementById('example1'));
+  // babel会将es6语法转换为es5以下的语法
+  ReactDOM.render(<Person {...person}/>, document.getElementById('example1'));
 
 </script>
 </body>
