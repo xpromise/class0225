@@ -17,6 +17,85 @@
     2. 切换时间为2S
     3. 点击按钮从界面中移除组件界面
    */
+
+  /*
+    React中组件的this指向：
+      1. 生命周期函数this都指向组件的实例对象
+      2. 其他自定义函数this默认指向undefined
+   */
+
+  class LifeCircle extends React.Component {
+    /*
+      constructor\componentWillMount\componentDidMount 函数只会执行一次
+     */
+
+    // 1. 初始化状态数据  2. 改变函数的this指向  3. 初始化createRef
+    // 因为有简写方式，所以现在不定义constructor
+    constructor() {
+      super();
+      // console.log(this);
+      console.log('constructor()');
+
+      this.state = {
+        flag: false
+      }
+    }
+
+    // 组件将要挂载：打算在render方法之前做一些准备工作
+    // 这个生命周期函数一般不用：不想影响初始化渲染速度
+    componentWillMount() {
+      // console.log(this);
+      console.log('componentWillMount()');
+    }
+
+    // 组件已经挂载：发送ajax请求、设置定时器等异步任务
+    // 优点：不会影响初始化渲染速度、只会执行一次
+    componentDidMount() {
+      // console.log(this);
+      console.log('componentDidMount()');
+    }
+
+    // 用来做性能优化：减少组件的重新渲染次数
+    shouldComponentUpdate(nextProps, nextState) {
+      console.log('shouldComponentUpdate()');
+      // 判断之前的state/props和最新的state/props是否相等，相等就不更新，不相等才更新
+
+      //获取之前的state
+      const prevState = this.state;
+
+      /*if (prevState.flag === nextState.flag) return false;
+
+      // 要求函数必须返回一个布尔值
+      return true;*/
+
+      return prevState.flag !== nextState.flag;
+    }
+
+    componentWillUpdate() {
+      console.log('componentWillUpdate()');
+    }
+
+    componentDidUpdate() {
+      console.log('componentDidUpdate()');
+    }
+
+    handleClick = () => {
+      this.setState({
+        flag: true
+      })
+    }
+
+    // 返回要渲染的虚拟DOM对象
+    render() {
+      // console.log(this);
+      console.log('render()');
+      return <h2 onClick={this.handleClick}>LifeCircle</h2>;
+    }
+
+  }
+
+  ReactDOM.render(<LifeCircle />, document.getElementById('example'));
+
 </script>
 </body>
 </html>
