@@ -1,5 +1,8 @@
-.reply {
-  margin-top: 0px;
+.del-btn{
+  border: none;
+  background-color: transparent;
+  width: 40px;
+  outline: none;
 }
 
 li {
@@ -17,10 +20,6 @@ li {
   text-align: center;
 }
 
-.handle a {
-  display: block;
-  text-decoration: none;
-}
 
 .list-group-item .centence {
   padding: 0px 50px;

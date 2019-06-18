@@ -17,6 +17,18 @@ class App extends React.Component {
     ]
   };
 
+  updateComment = (comment) => {
+    this.setState({
+      comments: [comment, ...this.state.comments]
+    })
+  }
+
+  delComment = (i) => {
+    this.setState({
+      comments: this.state.comments.filter((item, index) => i !== index)
+    })
+  }
+
   render() {
     // 获取状态值
     const { comments } = this.state;
@@ -33,8 +45,8 @@ class App extends React.Component {
           </div>
         </header>
         <div className="container">
-          <AddComment />
-          <CommentsList comments={comments} />
+          <AddComment updateComment={this.updateComment}/>
+          <CommentsList comments={comments} delComment={this.delComment} />
         </div>
       </div>
     );
