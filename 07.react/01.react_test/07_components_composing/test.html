@@ -41,8 +41,8 @@
     class App extends React.Component {
       // 初始化状态
       state = {
-        todos: ['吃饭~', '睡觉~', '抱小郭德纲~']
-      }
+        todos: [{id: 1, content: '吃饭~'}, {id: 2, content: '睡觉~'}]
+      };
 
       updateTodos = (todo) => {
         // 获取之前的state
@@ -51,9 +51,9 @@
         // todos.unshift(todo);
         // 更新状态
         this.setState({
-          todos: [todo, ...todos]
+          todos: [{id: todos.length + 1, content: todo}, ...todos]
         })
-      }
+      };
 
       render() {
         const { todos } = this.state;
@@ -71,7 +71,7 @@
       static propTypes = {
         updateTodos: PropTypes.func.isRequired,
         length: PropTypes.number.isRequired
-      }
+      };
 
       inputRef = React.createRef();
 
@@ -100,13 +100,13 @@
     class TodoList extends React.Component {
       static propTypes = {
         todos: PropTypes.array.isRequired
-      }
+      };
 
       render() {
         return <ul>
           {
-            this.props.todos.map((item, index) => {
-              return <li key={index}>{item}</li>;
+            this.props.todos.map((item) => {
+              return <li key={item.id}>{item.content}</li>;
             })
           }
         </ul>

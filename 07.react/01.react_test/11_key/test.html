@@ -35,7 +35,7 @@
    4. 总结
     如果往数组前面 添加/删除/排序 这时候用id做为key值，性能更好，也不会出问题
     如果是往最后 添加/删除 这时候用啥都行
-    最好：有id就用id
+    最好：有id就用id, 没有id并且是往最后面修改可以用index，如果不是最后就自己创建id
    */
 
   class PersonList extends React.Component {
@@ -45,7 +45,7 @@
         {id: 1, name: 'Tom', age: 13},
         {id: 2, name: 'Jack', age: 12}
       ]
-    }
+    };
 
     add = () => {
       const { persons } = this.state;
@@ -53,19 +53,19 @@
       this.setState({
         persons: [person, ...persons]
       })
-    }
+    };
 
     remove = () => {
       this.setState({
         persons: this.state.persons.filter((item, index) => index !== 0)
       })
-    }
+    };
 
     sort = () => {
       const persons = [...this.state.persons];
       persons.sort((p1, p2) => p1.age - p2.age);
       this.setState({persons});
-    }
+    };
 
     render() {
       const { persons } = this.state;

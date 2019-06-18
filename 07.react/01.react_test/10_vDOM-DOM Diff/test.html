@@ -19,7 +19,8 @@
 
   class HelloWorld extends React.Component {
     constructor(props) {
-      super(props)
+      super(props); // 在constructor能使用this.props
+      // 如果super()中没有传入props，那么this.props的值就没有东西
       this.state = {
           date: new Date()
       }
