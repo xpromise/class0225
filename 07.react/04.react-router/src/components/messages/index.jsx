@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+
+import MessagesDetail from '../messages-detail';
 
 export default class Messages extends Component {
   state = {
@@ -19,15 +21,28 @@ export default class Messages extends Component {
     }, 1000)
   }
 
+  goForward = () => {
+    this.props.history.goForward();
+  }
+
+  goBack = () => {
+    this.props.history.goBack();
+  }
+
   render() {
-    return <ul>
-      {
-        this.state.messagesArr.map((item, index) => {
-          return <li key={index}>
-            <Link to={`/home/messages/${item.id}`}>{item.content}</Link>
-          </li>
-        })
-      }
-    </ul>;
+    return <div>
+      <ul>
+        {
+          this.state.messagesArr.map((item, index) => {
+            return <li key={index}>
+              <Link to={`/home/messages/${item.id}`}>{item.content}</Link>
+              <button onClick={this.goForward}>前进</button>
+              <button onClick={this.goBack}>后退</button>
+            </li>
+          })
+        }
+      </ul>
+      <Route path="/home/messages/:id" component={MessagesDetail}/>
+    </div>;
   }
 }

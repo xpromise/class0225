@@ -28,6 +28,10 @@ export default class App extends Component {
                 Route 用来根据网址/路径来加载组件（一旦路径匹配上就加载组件，没有匹配上就不加载）
                 Redirect 一旦组件被加载，就修改网址，同时添加了浏览历史记录（一旦路由没有匹配上，就会重定向） 通常放最后
                 Switch 切换。 里面的组件有且只有一个生效（从上到下依次匹配）
+
+                两种方式更改浏览器历史记录和网址
+                  Link / NavLink  路由导航链接
+                  this.props.history.goBack() 编程式导航
               */}
               <NavLink className="list-group-item" activeClassName="my-active" to="/about">About</NavLink>
               <NavLink className="list-group-item" activeClassName="my-active" to="/home">Home</NavLink>
