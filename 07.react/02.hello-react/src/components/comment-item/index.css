@@ -1,0 +1,30 @@
+.del-btn{
+  border: none;
+  background-color: transparent;
+  width: 40px;
+  outline: none;
+}
+
+li {
+  transition: .5s;
+  overflow: hidden;
+}
+
+.handle {
+  width: 40px;
+  border: 1px solid #ccc;
+  background: #fff;
+  position: absolute;
+  right: 10px;
+  top: 1px;
+  text-align: center;
+}
+
+
+.list-group-item .centence {
+  padding: 0px 50px;
+}
+
+.user {
+  font-size: 22px;
+}
