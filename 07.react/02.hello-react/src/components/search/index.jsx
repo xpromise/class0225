@@ -16,11 +16,16 @@ export default class Search extends Component {
     })
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return this.state.searchName !== nextState.searchName;
+  }
+
   search = () => {
     this.props.updateSearchName(this.state.searchName);
   }
 
   render() {
+    console.log('render');
     return (
       <section className="jumbotron">
         <h3 className="jumbotron-heading">Search Github Users</h3>

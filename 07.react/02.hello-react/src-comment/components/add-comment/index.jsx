@@ -11,8 +11,10 @@ class AddComment extends Component {
 
   state = {
     name: '',
-    content: ''
+    content: '',
   }
+
+  id = 2
 
   handleChange = (stateName) => {
     return (e) => {
@@ -30,7 +32,7 @@ class AddComment extends Component {
 
     if (!name || !content) return alert('输出的内容不能为空~');
 
-    this.props.updateComment({name, content});
+    this.props.updateComment({name, content, id: ++this.id});
 
     // 清空数据
     this.setState({
@@ -40,6 +42,8 @@ class AddComment extends Component {
   }
 
   render() {
+    console.log('render()');
+
     const { name, content } = this.state;
     return (
       <div className="col-md-4">

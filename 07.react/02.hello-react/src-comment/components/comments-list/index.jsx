@@ -22,7 +22,7 @@ class CommentsList extends Component {
         <ul className="list-group">
           {
             comments.map((item, index) => {
-              return <CommentItem comment={item} key={index} index={index} delComment={delComment}/>
+              return <CommentItem comment={item} key={item.id} index={index} delComment={delComment}/>
             })
           }
         </ul>

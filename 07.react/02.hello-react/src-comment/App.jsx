@@ -12,8 +12,8 @@ class App extends React.Component {
   // 初始化状态
   state = {
     comments: [
-      {name: 'jack', content: 'i love rose'},
-      {name: 'rose', content: 'i love peihua'}
+      {name: 'jack', content: 'i love rose', id: 1},
+      {name: 'rose', content: 'i love peihua', id: 2}
     ]
   };
 
