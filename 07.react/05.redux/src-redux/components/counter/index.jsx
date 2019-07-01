@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { increment, decrement } from '../../redux/action-creators';
+
 export default class Counter extends Component {
   static propTypes = {
-    num: PropTypes.number.isRequired,
-    increment: PropTypes.func.isRequired,
-    decrement: PropTypes.func.isRequired,
+    store: PropTypes.object.isRequired
   };
 
   state = {
@@ -19,29 +19,42 @@ export default class Counter extends Component {
   };
 
   increment = () => {
-    this.props.increment(this.state.value);
+    // 创建action对象
+    const action = increment(this.state.value);
+    // 调用dispatch方法
+    this.props.store.dispatch(action);
   };
 
   decrement = () => {
-    this.props.decrement(this.state.value);
+    // 创建action对象
+    const action = decrement(this.state.value);
+    // 调用dispatch方法
+    this.props.store.dispatch(action);
   };
 
   incrementIfOdd = () => {
-    const { num } = this.props;
+    const num = this.props.store.getState();
+
     if ((num & 1) === 1) {
-      this.props.increment(this.state.value);
+      // 创建action对象
+      const action = increment(this.state.value);
+      // 调用dispatch方法
+      this.props.store.dispatch(action);
     }
   };
 
   incrementAsync = () => {
     setTimeout(() => {
-      this.props.increment(this.state.value);
+      // 创建action对象
+      const action = increment(this.state.value);
+      // 调用dispatch方法
+      this.props.store.dispatch(action);
     }, 1000)
   };
 
   render() {
     // 读取store对象的状态数据
-    const { num } = this.props;
+    const num = this.props.store.getState();
 
     return <Fragment>
       <h2>click {num} times</h2>
