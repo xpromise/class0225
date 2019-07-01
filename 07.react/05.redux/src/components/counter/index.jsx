@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { increment, decrement } from '../../redux/action-creators';
 
 export default class Counter extends Component {
-  /*static propTypes = {
+  static propTypes = {
     store: PropTypes.object.isRequired
-  };*/
+  };
 
   state = {
     value: 1
