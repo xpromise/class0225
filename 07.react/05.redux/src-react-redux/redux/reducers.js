@@ -2,7 +2,7 @@
   根据之前的状态和action来生成新的状态
  */
 
-import { INCREMENT, DECREMENT, ERROR } from './action-types';
+import { INCREMENT, DECREMENT } from './action-types';
 /*
   函数名一般就和管理的状态数据相关。
   初始化状态数据。
@@ -14,10 +14,6 @@ function num(prevState = 0, action) {
       return prevState + action.data;
     case DECREMENT :
       return prevState - action.data;
-    case ERROR :
-      // 进行错误提示~
-      console.log(action.data);
-      return prevState;
     default :
       return prevState;
   }

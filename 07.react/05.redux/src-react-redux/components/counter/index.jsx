@@ -34,7 +34,9 @@ export default class Counter extends Component {
   };
 
   incrementAsync = () => {
-    this.props.incrementAsync(this.state.value);
+    setTimeout(() => {
+      this.props.increment(this.state.value);
+    }, 1000)
   };
 
   render() {

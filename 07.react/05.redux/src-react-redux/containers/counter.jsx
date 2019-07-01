@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // 引入要包装的UI组件
 import Counter from '../components/counter';
 
-import { increment, decrement, incrementAsync } from '../redux/action-creators';
+import { increment, decrement } from '../redux/action-creators';
 
 // 遍历state，以props的方式传到组件中
 // 将store对象中的状态数据，传给UI组件
@@ -39,5 +39,5 @@ export default connect(
 // 生成容器组件，暴露出去
 export default connect(
   (state) => ({num: state}),
-  { increment, decrement, incrementAsync }
+  { increment, decrement }
 )(Counter);
