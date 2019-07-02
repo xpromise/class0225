@@ -8,6 +8,23 @@
 <script type="text/javascript" src="./Promise.js"></script>
 <script type="text/javascript">
 
+  const promise = new Promise((resolve, reject) => {
+    // resolve(11);
+    reject(22);
+    // throw 22;
+  });
+  
+  console.log(promise);
+
+  promise.then(
+    (value) => {
+      console.log('成功回调函数触发了~', value);
+    },
+    (reason) => {
+      console.log('失败回调函数触发了~', reason);
+    }
+  )
+
 </script>
 </body>
 </html>
