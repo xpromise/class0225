@@ -13,14 +13,14 @@
     // reject(22);
     // throw 22;
     setTimeout(function () {
-      resolve(11);
+      reject(11);
     }, 1000)
   });
   
   console.log(promise);
 
   promise
-    .then(
+    /*.then(
       (value) => {
         console.log('成功回调函数触发了111~', value);
         // return 222;
@@ -40,7 +40,34 @@
       (reason) => {
         console.log('失败回调函数触发了222~', reason);
       }
-    )
+    )*/
+    .then((value) => {
+      console.log('then方法11触发了', value);
+    })
+    .catch((reason) => {
+      console.log('catch方法11触发了', reason);
+    })
+    .then((value) => {
+      console.log('then方法22触发了', value);
+    })
+    .catch((reason) => {
+      console.log('catch方法22触发了', reason);
+    })
+
+
+  const promise1 = Promise.resolve(123);
+  const promise2 = Promise.resolve(new Promise((resolve, reject) => resolve(456)));
+  const promise3 = Promise.reject(789);
+
+  Promise.all([promise1, promise2])
+    .then((value) => {
+      console.log('value', value);
+    })
+    .catch((reason) => {
+      console.log('reason', reason);
+    })
+
+
 
   console.log('同步代码执行完了');
 

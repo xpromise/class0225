@@ -49,14 +49,16 @@
       }
     }
 
+
   }
 
   Promise.prototype.then = function (onFulfilled, onRejected) {
+    /*this.callbacks.push({
+      onFulfilled: onFulfilled,
+      onRejected: onRejected
+    });*/
     const status = this.status;
     const _self = this;
-
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : function (value) { return value };
-    onRejected = typeof onRejected === 'function' ? onRejected : function (reason) { throw reason };
 
     let promise;
 
@@ -155,68 +157,21 @@
     }
   }
 
-  Promise.prototype.catch = function (onRejeced) {
-    return this.then(null, onRejeced);
-  };
-
-  Promise.resolve = function (value) {
-    if (value instanceof Promise) return value;
-
-    return new Promise((resolve, reject) => {
-      resolve(value);
-    })
-  };
-
-  Promise.reject = function (reason) {
-    return new Promise((resolve, reject) => {
-      reject(reason);
-    })
-  };
-
-  Promise.all = function (promises) {
-    let resolvedNum = 0;
-    const promisesLength = promises.length;
-    const results = new Array(promisesLength);
-
-    return new Promise((resolve, reject) => {
-      promises.forEach((promise, index) => {
-        promise.then((value) => {
-          // 成功
-          // 保证对应的添加数据
-          results[index] = value;
-          resolvedNum++;
-          if (resolvedNum === promisesLength) {
-            // 全部成功
-            resolve(results);
-          }
-        }, (reason) => {
-          // 失败
-          reject(reason);
-        })
-      })
-
-    })
+  Promise.prototype.catch = function () {
 
   };
 
-  Promise.race = function (promises) {
-
-    // return new Promise((resolve, reject) => promises.forEach((promise) => promise.then(resolve, reject)))
-    return new Promise((resolve, reject) => {
-      promises.forEach((promise) => {
-        promise.then((value) => {
-          // 成功
-          resolve(value);
-        }, (reason) => {
-          // 失败
-          reject(reason);
-        })
-      })
-
-    })
+  Promise.resolve = function () {
 
   };
 
+  Promise.reject = function () {
+
+  };
+
+  Promise.all = function () {
+
+  };
 
   return Promise;
 

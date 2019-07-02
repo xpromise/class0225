@@ -15,7 +15,7 @@
   console.log('创建promise后');
 
   promise
-    .then(
+    /*.then(
       (res) => {
         console.log('执行成功回调111', res);
       },
@@ -33,12 +33,21 @@
       (err) => {
         console.log('执行失败回调222', err);
       }
-    )
+    );*/
+    .then((value) => {
+      console.log('then方法执行了', value);
+    })
+    .then((xxx) => xxx, (reason) => {
+      console.log('catch方法执行了', reason);
+    })
+    /*.catch((reason) => {
+      console.log('catch方法执行了', reason);
+    })*/
 
   console.log(promise);
   
-  const promise2 = Promise.resolve(new Promise((resolve, reject) => reject(3)));
-  console.log(promise2);
+  const promise2 = Promise.reject(new Promise((resolve, reject) => resolve(3)));
+  console.log('promise2', promise2);
 
   const promise3 = Promise.resolve(3);
   const promise4 = Promise.reject(4);
