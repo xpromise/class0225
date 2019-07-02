@@ -36,7 +36,7 @@
         }, 0)
       }
     }
-
+    
     function reject(reason) {
       if (_self.status === 'pending') {
         _self.status = 'rejected';
@@ -48,60 +48,15 @@
         }, 0)
       }
     }
-
+    
 
   }
 
   Promise.prototype.then = function (onFulFilled, onRejected) {
-    /*this.callbacks.push({
+    this.callbacks.push({
       onFulFilled: onFulFilled,
       onRejected: onRejected
-    });*/
-
-    const status = this.status;
-    const _self = this;
-
-    let promise;
-
-    if (status === 'pending') {
-      // 当前处理的promise对象的状态为初始化状态
-      promise = new Promise((resolve, reject) => {});
-
-    } else if (status === 'fulfilled') {
-      // 当前处理的promise对象的状态为成功状态
-      promise = new Promise((resolve, reject) => {
-        setTimeout(function () {
-          try {
-            // 执行成功的回调函数 - 异步执行
-            // 将前面resolve(value),传入进成功回调
-            const result = onFulFilled(_self.data);
-
-            if (result instanceof Promise) {
-              // 说明成功的回调函数返回值是promise对象
-              /*result.then(function (value) {
-                resolve(value)
-              }, function (reason) {
-                reject(reason)
-              })*/
-              result.then(resolve, reject);
-            } else {
-              // 说明不是promise对象，默认返回成功状态的promise
-              resolve(result);
-            }
-          } catch (e) {
-            reject(e);
-          }
-        });
-
-      });
-
-    } else {
-      // 当前处理的promise对象的状态为失败状态
-      promise = new Promise((resolve, reject) => {});
-
-    }
-
-    return promise;
+    })
   };
 
   Promise.prototype.catch = function () {

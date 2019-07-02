@@ -9,21 +9,38 @@
 <script type="text/javascript">
 
   const promise = new Promise((resolve, reject) => {
-    // resolve(11);
-    reject(22);
+    resolve(11);
+    // reject(22);
     // throw 22;
   });
   
   console.log(promise);
 
-  promise.then(
-    (value) => {
-      console.log('成功回调函数触发了~', value);
-    },
-    (reason) => {
-      console.log('失败回调函数触发了~', reason);
-    }
-  )
+  promise
+    .then(
+      (value) => {
+        console.log('成功回调函数触发了111~', value);
+
+        // return 222;
+        /*return new Promise((resolve, reject) => {
+
+        })*/
+        throw 222;
+      },
+      (reason) => {
+        console.log('失败回调函数触发了111~', reason);
+      }
+    )
+    .then(
+      (value) => {
+        console.log('成功回调函数触发了222~', value);
+      },
+      (reason) => {
+        console.log('失败回调函数触发了222~', reason);
+      }
+    )
+
+  console.log('同步代码执行完了');
 
 </script>
 </body>
