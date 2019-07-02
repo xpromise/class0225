@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>promise</title>
+</head>
+<body>
+<script type="text/javascript">
+  console.log('创建promise之前');
+  // 创建promise
+  const promise = new Promise((resolve, reject) => {
+    console.log('创建promise时');
+    throw 1; // 相当于reject(2)
+  });
+  console.log('创建promise后');
+
+  promise
+    .then(
+      (res) => {
+        console.log('执行成功回调111', res);
+      },
+      (err) => {
+        console.log('执行失败回调111', err);
+        // return 2;
+        // throw 2;
+        return new Promise((resolve, reject) => reject(2));
+      }
+    )
+    .then(
+      (res) => {
+        console.log('执行成功回调222', res);
+      },
+      (err) => {
+        console.log('执行失败回调222', err);
+      }
+    )
+
+  console.log(promise);
+  
+  const promise2 = Promise.resolve(new Promise((resolve, reject) => reject(3)));
+  console.log(promise2);
+
+  const promise3 = Promise.resolve(3);
+  const promise4 = Promise.reject(4);
+  
+  Promise.all([promise3, 'abc', promise4])
+    .then((value) => {
+      console.log('all成功了~', value);
+    })
+    .catch((reason) => {
+      console.log('all失败了~',reason);
+    })
+
+  Promise.race([promise3, 'abc', promise4])
+    .then((value) => {
+      console.log('race成功了~', value);
+    })
+    .catch((reason) => {
+      console.log('race失败了~',reason);
+    })
+  
+
+
+</script>
+</body>
+</html>

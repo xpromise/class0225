@@ -1,7 +1,7 @@
 /*
   根据之前的状态和action来生成新的状态
  */
-
+import { combineReducers } from 'redux';
 import { INCREMENT, DECREMENT, ERROR } from './action-types';
 /*
   函数名一般就和管理的状态数据相关。
@@ -23,5 +23,14 @@ function num(prevState = 0, action) {
   }
 }
 
+function value() {
+
+}
+
 // 暴露出去
 export default num;
+/*
+export default combineReducers({
+  value,
+  num
+});*/
