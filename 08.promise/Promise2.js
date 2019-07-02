@@ -32,7 +32,7 @@
 
         // 执行成功的回调函数 -> 必须异步执行
         setTimeout(function () {
-          _self.callbacks.forEach((fnObj) => fnObj.onFulfilled(value))
+          _self.callbacks.forEach((fnObj) => fnObj.onFulFilled(value))
         }, 0)
       }
     }
@@ -52,9 +52,9 @@
 
   }
 
-  Promise.prototype.then = function (onFulfilled, onRejected) {
+  Promise.prototype.then = function (onFulFilled, onRejected) {
     /*this.callbacks.push({
-      onFulfilled: onFulfilled,
+      onFulFilled: onFulFilled,
       onRejected: onRejected
     });*/
     const status = this.status;
@@ -64,53 +64,24 @@
 
     if (status === 'pending') {
       // 当前处理的promise对象的状态为初始化状态
-      promise = new Promise(function (resolve, reject) {
-        _self.callbacks.push({
-          onFulfilled: function (value) {
-            /*try {
-              const result = onFulfilled(value);
-              if (result instanceof Promise) {
-                result.then(resolve, reject);
-              } else {
-                resolve(result);
-              }
-            } catch (e) {
-              reject(e);
-            }*/
-            handlePromiseStatus(resolve, reject, onFulfilled, value);
-          },
-          onRejected: function (reason) {
-            /*try {
-              const result = onRejected(reason);
-              if (result instanceof Promise) {
-                result.then(resolve, reject);
-              } else {
-                resolve(result);
-              }
-            } catch (e) {
-              reject(e);
-            }*/
-            handlePromiseStatus(resolve, reject, onRejected, reason);
-          }
-        })
-      });
+      promise = new Promise((resolve, reject) => {});
 
     } else if (status === 'fulfilled') {
       // 当前处理的promise对象的状态为成功状态
       promise = new Promise((resolve, reject) => {
         setTimeout(function () {
-          /*try {
+          try {
             // 执行成功的回调函数 - 异步执行
             // 将前面resolve(value),传入进成功回调
-            const result = onFulfilled(_self.data);
+            const result = onFulFilled(_self.data);
 
             if (result instanceof Promise) {
               // 说明成功的回调函数返回值是promise对象
-              /!*result.then(function (value) {
+              /*result.then(function (value) {
                 resolve(value)
               }, function (reason) {
                 reject(reason)
-              })*!/
+              })*/
               result.then(resolve, reject);
             } else {
               // 说明不是promise对象，默认返回成功状态的promise
@@ -118,44 +89,18 @@
             }
           } catch (e) {
             reject(e);
-          }*/
-          handlePromiseStatus(resolve, reject, onFulfilled, _self.data);
+          }
         });
       });
+
     } else {
       // 当前处理的promise对象的状态为失败状态
-      promise = new Promise((resolve, reject) => {
-        setTimeout(function () {
-          /*try {
-            const result = onRejected(_self.data);
-            if (result instanceof Promise) {
-              result.then(resolve, reject);
-            } else {
-              resolve(result);
-            }
-          } catch (e) {
-            reject(e);
-          }*/
-          handlePromiseStatus(resolve, reject, onRejected, _self.data);
-        })
-      });
+      promise = new Promise((resolve, reject) => {});
+
     }
 
     return promise;
   };
-
-  function handlePromiseStatus(resolve, reject, fn, data) {
-    try {
-      const result = fn(data);
-      if (result instanceof Promise) {
-        result.then(resolve, reject);
-      } else {
-        resolve(result);
-      }
-    } catch (e) {
-      reject(e);
-    }
-  }
 
   Promise.prototype.catch = function () {
 

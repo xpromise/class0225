@@ -9,9 +9,12 @@
 <script type="text/javascript">
 
   const promise = new Promise((resolve, reject) => {
-    resolve(11);
+    // resolve(11);
     // reject(22);
     // throw 22;
+    setTimeout(function () {
+      resolve(11);
+    }, 1000)
   });
   
   console.log(promise);
@@ -20,12 +23,11 @@
     .then(
       (value) => {
         console.log('成功回调函数触发了111~', value);
-
         // return 222;
-        /*return new Promise((resolve, reject) => {
-
-        })*/
-        throw 222;
+        return new Promise((resolve, reject) => {
+          reject(22)
+        })
+        // throw 222;
       },
       (reason) => {
         console.log('失败回调函数触发了111~', reason);
