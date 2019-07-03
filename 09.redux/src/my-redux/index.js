@@ -52,9 +52,32 @@ export function createStore(reducers) {
 
 // 暴露combineReducers
 export function combineReducers(reducerObj) {
-
+  /*
+  reducerObj:
+    {
+      num: (prevState, action) => newState,
+      category: (prevState, action) => newState,
+    }
+  执行新的reducers函数，返回值newState
+    {
+      num: reducerObj.num(prevState.num, action),
+      category: reducerObj.category(prevState.category, action)
+    }
+   */
   // 返回值是一个reducer函数
   return function (prevState = {}, action) {
+    // 创建一个数据装下提取对象的所有属性
+    /*const keysArr = Object.keys(reducerObj); // ['num', 'category']
 
+    const newState = keysArr.reduce((prev, key) => {
+      prev[key] = reducerObj[key](prevState, action);
+      return prev;
+    }, {});
+
+    return newState;*/
+    return Object.keys(reducerObj).reduce((prev, key) => {
+      prev[key] = reducerObj[key](prevState[key], action);
+      return prev;
+    }, {});
   }
 }

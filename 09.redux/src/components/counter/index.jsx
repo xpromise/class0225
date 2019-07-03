@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { increment, decrement } from '../../redux/action-creators';
 
 export default class Counter extends Component {
   static propTypes = {
-    store: PropTypes.object.isRequired
+    increment: PropTypes.func.isRequired,
+    decrement: PropTypes.func.isRequired,
+    num: PropTypes.number.isRequired
   }
 
   state = {
@@ -20,29 +21,29 @@ export default class Counter extends Component {
   };
 
   increment = () => {
-    this.props.store.dispatch(increment(this.state.value));
+    this.props.increment(this.state.value);
   };
 
   decrement = () => {
-    this.props.store.dispatch(decrement(this.state.value));
+    this.props.decrement(this.state.value);
   };
 
   incrementIfOdd = () => {
-    const num = this.props.store.getState();
+    const { num } = this.props;
 
     if ((num & 1) === 1) {
-      this.props.store.dispatch(increment(this.state.value));
+      this.props.increment(this.state.value);
     }
   };
 
   incrementAsync = () => {
     setTimeout(() => {
-      this.props.store.dispatch(increment(this.state.value));
+      this.props.increment(this.state.value);
     }, 1000)
   };
 
   render() {
-    const num = this.props.store.getState();
+    const { num } = this.props;
 
     return <Fragment>
       <h2>click {num} times</h2>

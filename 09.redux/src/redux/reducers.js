@@ -1,7 +1,7 @@
 /*
   根据之前的状态和action来生成新的状态
  */
-import { combineReducers } from 'redux';
+import { combineReducers } from '../my-redux';
 import { INCREMENT, DECREMENT } from './action-types';
 
 function num(prevState = 0, action) {
@@ -27,11 +27,10 @@ function category(prevState = [], action) {
 }
 
 // store对象管理的数据就是num
-export default num;
+// export default num;
 
 // store对象管理的数据就是 {  }
-/*
 export default combineReducers({
   num,
   category
-})*/
+})
